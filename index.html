@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- p5 and p5.dom libraries -->
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.dom.js"></script>
+
+    <!-- Main javascript files containing p5.js code -->
+    <script src="sketch.js"></script>
+    
+    <!-- Extra script files -->
+    <!-- Contains javascript code for different elements of the drawing app -->
+    <script src="toolbox.js"></script>
+    <script src="colourPalette.js"></script>
+    <script src="helperFunctions.js"></script>
+    
+    <!-- Script files for all drawing tools in the toolbox -->
+    <script src="toolboxTools/freehandTool.js"></script>
+    <script src="toolboxTools/eraserTool.js"></script>
+    <script src="toolboxTools/lineToTool.js"></script>
+    <script src="toolboxTools/mirrorDrawTool.js"></script>
+    <script src="toolboxTools/sprayCanTool.js"></script>
+    <script src="toolboxTools/rectTool.js"></script>
+    <script src="toolboxTools/ellipseTool.js"></script>
+    <script src="toolboxTools/stampTool.js"></script>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- Title of the drawing app -->
+    <title>Drawbility: The go to drawing web app!</title>
+  </head>
+
+  <body>
+    <!-- Div for the entire drawing app -->
+    <div class="wrapper">
+      <div class="box header">
+        <!-- Contains the heading and the clear and save image buttons -->
+        <h1 id="appName">Drawbility</h1>
+        <button class="headButton" id="clearButton">Clear</button>
+        <button class="headButton" id="saveImageButton">Save Image</button>
+        <button class="headButton" id="importImage">Import Image</button>
+        <button class="headButton" id="undo">Undo</button>
+        <button class="headButton" id="redo">Redo</button>
+      </div>
+      <div class="box" id="sidebar"></div>
+      <!-- Holds all the drawing tools -->
+      <div id="content"></div>
+      <!-- Contains the drawing canvas -->
+      <div class="box colourPalette"></div>
+      <!-- Div on the bottom left for choosing the color palette  -->
+      <div class="box options"></div>
+      <!-- Div on the bottom right for options -->
+    </div>
+  </body>
+</html>
