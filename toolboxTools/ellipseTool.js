@@ -88,26 +88,26 @@ function EllipseTool() {
   this.populateOptions = function () {
     let optionsHTML = {
       penSizePrompt: "<label for='input' class='options-label'>Ellipse Thickness:</label>",
-      penSizeInput: "<form class='increase-decrease-input'>  <div class='value-button' id='decrease' value='Decrease Value'>-</div>  <input type='number' id='number' value='2'/>  <div class='value-button' id='increase' value='Increase Value'>+</div>  </form>"
+      penSizeInput: "<form class='increase-decrease-input'>  <div class='value-button' id='ellipse-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='ellipse-number-input' value='self.ellipseThickness'/>  <div class='value-button' id='ellipse-increase' value='Increase Value'>+</div>  </form>"
       
     }
     select(".options").html(optionsHTML.penSizePrompt + optionsHTML.penSizeInput);
     // Click handler
     // increase
-    select("#increase").mouseClicked(function () {
-      var value = parseInt(document.getElementById('number').value, 10);
+    select("#ellipse-increase").mouseClicked(function () {
+      var value = parseInt(document.getElementById('ellipse-number-input').value, 10);
       value = isNaN(value) ? 0 : value;
       value++;
-      document.getElementById('number').value = value;
+      document.getElementById('ellipse-number-input').value = value;
       self.ellipseThickness = value * 5
     });
     //click handler
-    select("#decrease").mouseClicked(function () {
-      var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value < 1 ? value = 1 : '';
+    select("#ellipse-decrease").mouseClicked(function () {
+      var value = parseInt(document.getElementById('ellipse-number-input').value, 10);
+        value = isNaN(value) ? 1 : value;
+        value < 2 ? value = 2 : '';
         value--;
-        document.getElementById('number').value = value;
+        document.getElementById('ellipse-number-input').value = value;
         self.ellipseThickness = value * 5
     });
   };

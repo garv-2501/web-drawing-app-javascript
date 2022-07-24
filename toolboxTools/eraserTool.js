@@ -19,18 +19,20 @@ function EraserTool() {
       if (previousMouseX == -1) {
         previousMouseX = mouseX;
         previousMouseY = mouseY;
+        
       }
       // if we already have values for previousX and Y we can draw a line from
       // there to the current mouse location
       else {
         push();
-        strokeWeight(eraserSize);
+        strokeWeight(eraserSize + 2);
         stroke(255);
         line(previousMouseX, previousMouseY, mouseX, mouseY);
         previousMouseX = mouseX;
         previousMouseY = mouseY;
         pop();
       }
+      loadPixels();
     }
     // if the user has released the mouse we want to set the previousMouse values
     // back to -1.
@@ -38,6 +40,14 @@ function EraserTool() {
     else {
       previousMouseX = -1;
       previousMouseY = -1;
+
+      updatePixels();
+      push();
+      noFill();
+      strokeWeight(1);
+      stroke(0);
+      ellipse(mouseX, mouseY, eraserSize)
+      
     }
   };
 

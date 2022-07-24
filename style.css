@@ -157,14 +157,16 @@ body {
 }
 .value-button {
   display: inline-block;
-  color: black;
-  border: 1px solid #ddd;
+  color: #fff;
+  font-size: 27px;
+  border-radius:20px;
+  height: 20px;
   width: 35px;
-  height: 10px;
   text-align: center;
   vertical-align: middle;
-  padding: 11px 0;
-  background: #eee;
+  padding-bottom: 10px;
+  background-color: rgb(32, 32, 32);
+  cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -173,28 +175,12 @@ body {
   user-select: none;
 }
 .value-button:hover {
-  cursor: pointer;
+  opacity: 0.75
 }
-form #decrease {
-  margin-right: -4px;
-  border-radius: 8px 0 0 8px;
-}
-form #increase {
-  margin-left: -4px;
-  border-radius: 0 8px 8px 0;
-}
-form #input-wrap {
-  margin: 0px;
-  padding: 0px;
-}
-input#number {
-  text-align: center;
-  border: none;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  margin: 0px;
+.number-input {
+  border-radius: 10px;
+  height: 25px;
   width: 60px;
-  height: 35px;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
