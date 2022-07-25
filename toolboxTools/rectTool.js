@@ -3,6 +3,8 @@ function RectTool() {
   this.name = "rect";
   this.icon = "assets/rectTool.png";
 
+  this.rectThickness = 2;
+
   // We will be making a line from the previous point to the
   // new point.The following values store the location of the
   // starting point of the line. -1 shows that we haven't added a
@@ -11,6 +13,7 @@ function RectTool() {
   let startMouseX = -1;
   let startMouseY = -1;
   let drawing = false;
+  let self = this;
 
   this.draw = function () {
     // if the mouse is pressed
@@ -30,7 +33,7 @@ function RectTool() {
         // This will update the screen with the new line when the mouse is released
         // and then draw a line with starting X and Y and the current mouse X and Y
         updatePixels();
-        strokeWeight(10);
+        strokeWeight(self.rectThickness);
         noFill();
         if (startMouseX - mouseX > 0) {
           if (startMouseY - mouseY > 0) {
@@ -73,12 +76,30 @@ function RectTool() {
       startMouseY = -1;
     }
   };
-  
-
 
   this.populateOptions = function () {
-    select(".options").html(
-      "<div id='freehandTool-options'> <label for='input' class='options-label'>Line Color:</label> <input type='color' class='color-input'> <br> <label for='input' class='options-label' id='pen-thickness'>Line Thickness (max=200):</label> <input type='range' class='range-input' value='10' min='0' max='200'>  </div>"
-    );
+    let optionsHTML = {
+      penSizePrompt: "<label for='input' class='options-label'>Rectangle Thickness:</label>",
+      penSizeInput: "<form class='increase-decrease-input'>  <div class='value-button' id='rect-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='rect-number-input' value='2'/>  <div class='value-button' id='rect-increase' value='Increase Value'>+</div>  </form>"
+    }
+    select(".options").html(optionsHTML.penSizePrompt + optionsHTML.penSizeInput);
+    // Click handler
+    // increase
+    select("#rect-increase").mouseClicked(function () {
+      let value = parseInt(document.getElementById('rect-number-input').value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      document.getElementById('rect-number-input').value = value;
+      self.rectThickness = value
+    });
+    //click handler
+    select("#rect-decrease").mouseClicked(function () {
+      value = parseInt(document.getElementById('rect-number-input').value, 10);
+        value = isNaN(value) ? 1 : value;
+        value < 2 ? value = 2 : '';
+        value--;
+        document.getElementById('rect-number-input').value = value;
+        self.rectThickness = value
+    });
   };
 }

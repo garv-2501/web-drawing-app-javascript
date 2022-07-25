@@ -3,6 +3,8 @@ function LineToTool() {
   this.name = "lineTo";
   this.icon = "assets/lineTo.png";
 
+  this.lineThickness = 2;
+
   // We will be making a line from the previous point to the
   // new point.The following values store the location of the
   // starting point of the line. -1 shows that we haven't added a
@@ -11,6 +13,7 @@ function LineToTool() {
   let startMouseX = -1;
   let startMouseY = -1;
   let drawing = false;
+  let self = this;
 
   this.draw = function () {
     // if the mouse is pressed
@@ -30,7 +33,7 @@ function LineToTool() {
         // This will update the screen with the new line when the mouse is released
         // and then draw a line with starting X and Y and the current mouse X and Y
         updatePixels();
-        strokeWeight(10);
+        strokeWeight(self.lineThickness);
         line(startMouseX, startMouseY, mouseX, mouseY);
       }
     }
@@ -44,5 +47,31 @@ function LineToTool() {
     }
   };
 
+  this.populateOptions = function () {
+    let optionsHTML = {
+      penSizePrompt: "<label for='input' class='options-label'>Line Thickness:</label>",
+      penSizeInput: "<form class='increase-decrease-input'>  <div class='value-button' id='line-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='line-number-input' value='2'/>  <div class='value-button' id='line-increase' value='Increase Value'>+</div>  </form>"
+      
+    }
+    select(".options").html(optionsHTML.penSizePrompt + optionsHTML.penSizeInput);
+    // Click handler
+    // increase
+    select("#line-increase").mouseClicked(function () {
+      let value = parseInt(document.getElementById('line-number-input').value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      document.getElementById('line-number-input').value = value;
+      self.lineThickness = value
+    });
+    //click handler
+    select("#line-decrease").mouseClicked(function () {
+      value = parseInt(document.getElementById('line-number-input').value, 10);
+        value = isNaN(value) ? 1 : value;
+        value < 2 ? value = 2 : '';
+        value--;
+        document.getElementById('line-number-input').value = value;
+        self.lineThickness = value
+    });
+  };
 
 }

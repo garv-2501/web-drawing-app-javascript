@@ -137,7 +137,7 @@ body {
 /* ------------------- */
 .options {
   grid-area: options;
-  padding: 15px;
+  padding: 5px;
 }
 /* CSS for the directionButton in the mirrorDrawTool */
 #directionButton {
@@ -151,9 +151,12 @@ body {
   display: inline-block;
   margin-right: 10px;
   font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+  padding-bottom: 3px;
 }
 .increase-decrease-input {
   display: inline-block;
+  position: relative;
+  padding-bottom: 3px;
 }
 .value-button {
   display: inline-block;
