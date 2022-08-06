@@ -27,8 +27,8 @@ function Toolbox() {
       // sideBarItem.parent('sidebar');
       // sideBarItem.mouseClicked(toolbarItemClick);
   
-      let sideBarItem = createDiv("<img src='" + icon + "'></div>");
-      sideBarItem.class("sideBarItem");
+      let sideBarItem = createDiv("<img src='" + icon + "'>  <span class='tooltip-text'>" + name + " button" + "</span>  </div>");
+      sideBarItem.class("sideBarItem tooltip");
       sideBarItem.id(name + "sideBarItem");
       sideBarItem.parent("sidebar");
       sideBarItem.mouseClicked(toolbarItemClick);

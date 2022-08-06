@@ -95,6 +95,28 @@ body {
   border: solid;
   border-color: rgb(107, 107, 107);
 }
+/* CSS for sidebar icon tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px black;
+}
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 150px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  background-color: rgb(42, 42, 42);
+  border-radius: 5px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+}
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
 
 /* ------------------- */
 /* CSS for the convas */
