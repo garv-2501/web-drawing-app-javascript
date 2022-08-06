@@ -1,7 +1,7 @@
 function EraserTool() {
   // set an icon and a name for the object
+  this.name = "Eraser Tool";
   this.icon = "assets/eraserTool.png";
-  this.name = "eraser";
 
   this.eraserThickness = 50;
   // to smoothly draw we'll draw a line from the previous mouse location

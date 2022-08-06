@@ -103,7 +103,7 @@ body {
 }
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: 150px;
+  width: 100px;
   color: white;
   font-size: 14px;
   text-align: center;
@@ -111,11 +111,14 @@ body {
   border-radius: 5px;
   padding: 5px 0;
 
+  
+
   position: absolute;
   z-index: 1;
 }
 .tooltip:hover .tooltip-text {
   visibility: visible;
+  transition-delay: 500ms;
 }
 
 /* ------------------- */

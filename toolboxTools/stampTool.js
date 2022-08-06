@@ -1,6 +1,6 @@
 function StampTool() {
   // set an icon and a name for the object
-  this.name = "stamp";
+  this.name = "Stamp Tool";
   this.icon = "assets/stampTool.png";
 
   this.stampSize = 20;

@@ -1,6 +1,6 @@
 function EllipseTool() {
   // set an icon and a name for the object
-  this.name = "ellipse";
+  this.name = "Ellipse Tool";
   this.icon = "assets/ellipseTool.png";
 
   // We will be making a line from the previous point to the

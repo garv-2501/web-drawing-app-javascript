@@ -1,6 +1,6 @@
 function LineToTool() {
   // set an icon and a name for the object
-  this.name = "lineTo";
+  this.name = "Line Tool";
   this.icon = "assets/lineTo.png";
 
   this.lineThickness = 2;

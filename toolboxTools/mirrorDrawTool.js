@@ -1,5 +1,5 @@
 function MirrorDrawTool() {
-  this.name = "mirrorDraw";
+  this.name = "Mirror Tool";
   this.icon = "assets/mirrorDraw.png";
 
   //which axis is being mirrored (x or y) x is default

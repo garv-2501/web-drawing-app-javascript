@@ -1,6 +1,6 @@
 function RectTool() {
   // set an icon and a name for the object
-  this.name = "rect";
+  this.name = "Rect Tool";
   this.icon = "assets/rectTool.png";
 
   this.rectThickness = 2;

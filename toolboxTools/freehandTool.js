@@ -1,6 +1,6 @@
 function FreehandTool() {
   // set an icon and a name for the object
-  this.name = "freehand";
+  this.name = "Freehand Tool";
   this.icon = "assets/freehand.png";
   
   this.FreehandThickness = 5;
