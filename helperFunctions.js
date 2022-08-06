@@ -15,11 +15,17 @@ function HelperFunctions() {
     //event handler for the save image button. saves the canvsa to the
     //local file system.
     select("#saveImageButton").mouseClicked(function () {
-      d = day();
-      m = month();
-      y = year();
-      dateString = d + "_" + m + "_" + y + ".png";
-      save(dateString);
+      let result = window.prompt("Name your project:");
+      if (result == "") {
+        d = day();
+        m = month();
+        y = year();
+        dateString = d + "_" + m + "_" + y + ".png";
+        saveCanvas(dateString);
+      } else {
+        saveCanvas(result)
+      }
+      
     });
   }
   
