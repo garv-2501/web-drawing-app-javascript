@@ -1,7 +1,7 @@
 function SprayCanTool() {
   // set an icon and a name for the object
   this.name = "sprayCan Tool";
-  this.icon = "assets/sprayCan.png";
+  this.icon = "assets/sprayCanTool.png";
   // set the number of points and the spread of the spray
   this.sprayThickness = 2;
   this.sprayPoints = 13;

@@ -4,6 +4,9 @@ let toolbox = null;
 let colourP = null;
 let helpers = null;
 
+// Variable to store the main canvas
+let c;
+
 // Preloading the star image for the stamp tool
 let star;
 function preload() {
@@ -13,7 +16,7 @@ function preload() {
 function setup() {
   //create a canvas to fill the content div from index.html
   canvasContainer = select("#content");
-  let c = createCanvas(
+  c = createCanvas(
     canvasContainer.size().width,
     canvasContainer.size().height
   );
@@ -36,6 +39,7 @@ function setup() {
   toolbox.addTool(new StampTool());
   toolbox.addTool(new RectTool());
   toolbox.addTool(new EllipseTool());
+  toolbox.addTool(new EditableShapeTool())
 }
 
 function draw() {

@@ -1,7 +1,7 @@
-function editableShapesTool() {
+function EditableShapeTool() {
     // set an icon and a name for the object
     this.name = "Editable Shape Tool";
-    this.icon = "assets/stampTool.png";
+    this.icon = "assets/editableShapeTool.png";
   
     this.stampSize = 20;
     this.stampFreq = 20

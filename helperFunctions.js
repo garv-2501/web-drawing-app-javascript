@@ -25,7 +25,5 @@ function HelperFunctions() {
       } else {
         saveCanvas(result)
       }
-      
     });
-  }
-  
+}
