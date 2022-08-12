@@ -11,7 +11,7 @@ function StampTool() {
   let self = this;
 
   this.draw = function () {
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       let stampX = mouseX - self.stampSize / 2;
       let stampY = mouseY - self.stampSize / 2;
       image(star, stampX, stampY, self.stampSize, self.stampSize);

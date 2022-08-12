@@ -14,7 +14,7 @@ function EraserTool() {
 
   this.draw = function () {
     
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if they previousX and Y are -1. set them to the current
       // mouse X and Y if they are.
       if (previousMouseX == -1) {

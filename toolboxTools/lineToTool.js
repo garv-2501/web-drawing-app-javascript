@@ -17,7 +17,7 @@ function LineToTool() {
 
   this.draw = function () {
     // if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if starting X and Y are -1. If yes, set them to
       // current mouse X and Y.
       if (startMouseX == -1) {
