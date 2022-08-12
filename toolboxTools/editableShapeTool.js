@@ -2,46 +2,89 @@ function EditableShapeTool() {
     // set an icon and a name for the object
     this.name = "Editable Shape Tool";
     this.icon = "assets/editableShapeTool.png";
-  
-    this.stampSize = 20;
-    this.stampFreq = 20
-  
-    let startMouseX = -1;
-    let startMouseY = -1;
-    let self = this;
+
+    let editMode = false;
+    let currentShape = [];
+
+    this.setup = function() {
+      noFill();
+      loadPixels();
+    }
   
     this.draw = function () {
-      if (mouseIsPressed) {
-        let stampX = mouseX - self.stampSize / 2;
-        let stampY = mouseY - self.stampSize / 2;
-        image(star, stampX, stampY, self.stampSize, self.stampSize);
+      noFill();
+      updatePixels();
+
+      if (mouseIsPressed && mousePressOnCanvas(c)) {
+        if (!editMode) {
+          // Adding verticies to the currentShape array
+          currentShape.push({
+            x: mouseX,
+            y: mouseY,
+          });
+        } else {
+          for (i = 0; i < currentShape.length; i++) {
+            if (dist(mouseX, mouseY, currentShape[i].x, currentShape[i].y) < 15) {
+              currentShape[i].x = mouseX;
+              currentShape[i].y = mouseY;
+            }
+          }
+        }
       }
+    
+      beginShape();
+      for (let i = 0; i < currentShape.length; i++) {
+        vertex(currentShape[i].x, currentShape[i].y);
+    
+        // showing dots to move when edit mode on
+        if (editMode) {
+          ellipse(currentShape[i].x, currentShape[i].y, 5, 5);
+        }
+      }
+      endShape();
     };
   
     this.populateOptions = function () {
       let optionsHTML = {
-        stampSizePrompt: "<label for='input' class='options-label'>Stamp Size:</label>",
-        stampSizeInput: "<form class='increase-decrease-input'>  <div class='value-button' id='stamp-size-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='stamp-size-number-input' value='2'/>  <div class='value-button' id='stamp-size-increase' value='Increase Value'>+</div>  </form>  <br>",
-        stampFreqPrompt: "<label for='input' class='options-label'>Frequency:</label>",
-        stampFreqInput: "<form class='increase-decrease-input'>  <div class='value-button' id='stamp-freq-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='stamp-freq-number-input' value='2'/>  <div class='value-button' id='stamp-freq-increase' value='Increase Value'>+</div>  </form>"
+        editButton: "<button class='headButton' id='editButton'>Edit Button</button> <br><br>",
+        finishButton: "<button class='headButton' id='finishButton'>Finish Button</button>"
       }
-      select(".options").html(optionsHTML.stampSizePrompt + optionsHTML.stampSizeInput + optionsHTML.stampFreqPrompt + optionsHTML.stampFreqInput);
-      // Click handler - stamp size
-      select("#stamp-size-increase").mouseClicked(function () {
-        let stampSize = parseInt(document.getElementById('stamp-size-number-input').value, 10);
-        stampSize = isNaN(stampSize) ? 0 : stampSize;
-        stampSize++;
-        document.getElementById('stamp-size-number-input').value = stampSize;
-        self.stampSize = stampSize
+      select(".options").html(optionsHTML.editButton + optionsHTML.finishButton);
+
+      // click handler for edit button
+      select("#editButton").mouseClicked(function () {
+        if (editMode) {
+          editMode = false;
+          select("#editButton").html("Edit shape");
+        } else {
+          if (currentShape.length != 0) {
+            editMode = true;
+            select("#editButton").html("Add vertices");
+          }
+        }
       });
-      select("#stamp-size-decrease").mouseClicked(function () {
-        stampSize = parseInt(document.getElementById('stamp-size-number-input').value, 10);
-        stampSize = isNaN(stampSize) ? 1 : stampSize;
-        stampSize < 2 ? stampSize = 2 : '';
-        stampSize--;
-          document.getElementById('stamp-size-number-input').value = stampSize;
-          self.stampSize = stampSize
-      });
+
+      // click handler for finish button
+      select("#finishButton").mouseClicked(function() {
+        editMode = false;
+        select("#editButton").html("Edit shape")
+        draw();
+        loadPixels();
+        currentShape = [];
+      })
     };
+
+    // To not let mousePress outside of canvas affect things in the canvas
+    function mousePressOnCanvas(canvas) {
+      if (
+        mouseX > (canvas.elt.offsetLeft - 50) &&
+        mouseX < (canvas.elt.offsetLeft + canvas.width) &&
+        mouseY > (canvas.elt.offsetTop - 50) &&
+        mouseY < (canvas.elt.offsetTop + canvas.height)
+      ) {
+        return true;
+      }
+      return false;
+    }
   }
   
