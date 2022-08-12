@@ -46,10 +46,10 @@ function EditableShapeTool() {
   
     this.populateOptions = function () {
       let optionsHTML = {
-        editButton: "<button class='headButton' id='editButton'>Edit Button</button> <br><br>",
-        finishButton: "<button class='headButton' id='finishButton'>Finish Button</button>"
+        finishButton: "<button class='headButton' id='finishButton'>Finish Shape</button> <br>",
+        editButton: "<button class='headButton' id='editButton'>Edit Shape</button>"
       }
-      select(".options").html(optionsHTML.editButton + optionsHTML.finishButton);
+      select(".options").html(optionsHTML.finishButton + optionsHTML.editButton);
 
       // click handler for edit button
       select("#editButton").mouseClicked(function () {
