@@ -5,11 +5,6 @@ function EditableShapeTool() {
 
     let editMode = false;
     let currentShape = [];
-
-    this.setup = function() {
-      noFill();
-      loadPixels();
-    }
   
     this.draw = function () {
       noFill();
@@ -43,6 +38,12 @@ function EditableShapeTool() {
       }
       endShape();
     };
+
+    this.unselectTool = function() {
+      updatePixels();
+      //clear options
+      select(".options").html("");
+    }
   
     this.populateOptions = function () {
       let optionsHTML = {

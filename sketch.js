@@ -24,7 +24,7 @@ function setup() {
   // Canvas to fill the content div from index.html
   canvasContainer = select("#content");
   c = createCanvas(
-    canvasContainer.size().width,
+    canvasContainer.size().width + 15,
     canvasContainer.size().height
   );
   c.parent("content");
@@ -46,6 +46,7 @@ function setup() {
   toolbox.addTool(new RectTool());
   toolbox.addTool(new EllipseTool());
   toolbox.addTool(new EditableShapeTool())
+  toolbox.addTool(new ScissorTool())
 
   // Background of the canvas
   background(255)
@@ -59,5 +60,18 @@ function draw() {
   } else {
     alert("it doesn't look like your tool has a draw method!");
   }
-  
+}
+
+function mousePressed() {
+	// Call the mousePressed function from the selected tool.
+	if (toolbox.selectedTool.hasOwnProperty("mousePressed")) {
+		toolbox.selectedTool.mousePressed();
+	}
+}
+
+function mouseDragged(){
+	// Call the mouseDragged function from the selected tool.
+	if (toolbox.selectedTool.hasOwnProperty("mouseDragged")) {
+		toolbox.selectedTool.mouseDragged();
+	}
 }

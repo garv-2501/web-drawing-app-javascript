@@ -77,6 +77,12 @@ function RectTool() {
     }
   };
 
+  this.unselectTool = function() {
+		updatePixels();
+		//clear options
+		select(".options").html("");
+  }
+
   this.populateOptions = function () {
     let optionsHTML = {
       penSizePrompt: "<label for='input' class='options-label'>Rectangle Thickness:</label>",

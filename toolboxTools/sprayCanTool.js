@@ -24,6 +24,12 @@ function SprayCanTool() {
     }
   };
 
+  this.unselectTool = function() {
+		updatePixels();
+		//clear options
+		select(".options").html("");
+  }
+
   this.populateOptions = function () {
     let optionsHTML = {
       sprayThicknessPrompt: "<label for='input' class='options-label'>Spray Thickness:</label>",
