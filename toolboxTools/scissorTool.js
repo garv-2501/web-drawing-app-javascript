@@ -11,26 +11,22 @@ function ScissorTool() {
 
   this.setup = function() {
 
-    selectMode = false;
+    selectMode = 0;
     selectedArea = {x:0, y:0, w:0, h:0};
 
     // Main button for the scissorTool
     scissorButton = createButton('cut selected area');
     scissorButton.parent("#scissorButton");
     scissorButton.class(".headButton")
-
+    loadPixels();
     scissorButton.mousePressed(function () {
-      loadPixels();
-      if (selectMode == false) {
-        
-        selectMode = true;
+      if (selectMode == 0) {
+        selectMode = 1;
         scissorButton.html("select area")
-        
         updatePixels();
-
         selectedPixels = get(selectedArea.x, selectedArea.y, selectedArea.w, selectedArea.h)
       } else {
-        selectMode = false;
+        selectMode = 0;
         selectedArea = {x:0, y:0, w:10, h:10};
         scissorButton.html("cut selected area")
       }
@@ -40,9 +36,9 @@ function ScissorTool() {
 
   this.draw = function () {
     if (mouseIsPressed) {
-      if (selectMode == false) {
+      if (selectMode == 0) {
+        
         updatePixels();
-        loadPixels();
         push();
         noStroke();
         fill(80, 80, 80, 80);
@@ -53,7 +49,7 @@ function ScissorTool() {
   }
 
   this.mousePressed = function() {
-    if (selectMode == false) {
+    if (selectMode == 0) {
       selectedArea.x = mouseX;
       selectedArea.y = mouseY;
       selectedArea.w = 0;
@@ -62,14 +58,14 @@ function ScissorTool() {
   }
 
   this.mouseDragged = function() {
-    if (selectMode == false) {
+    if (selectMode == 0) {
       let w = mouseX - selectedArea.x;
       let h = mouseY - selectedArea.y;
 
       selectedArea.w = w;
       selectedArea.h = h;
     }
-    if (selectMode == true) {
+    if (selectMode == 1) {
       updatePixels();
       push();
       fill(255);
