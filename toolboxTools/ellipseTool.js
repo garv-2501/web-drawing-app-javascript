@@ -83,7 +83,7 @@ function EllipseTool() {
   };
 
   this.unselectTool = function() {
-		updatePixels();
+		//updatePixels();
 		//clear options
 		select(".options").html("");
   }

@@ -25,7 +25,7 @@ function SprayCanTool() {
   };
 
   this.unselectTool = function() {
-		updatePixels();
+		//updatePixels();
 		//clear options
 		select(".options").html("");
   }

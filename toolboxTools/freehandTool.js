@@ -41,7 +41,7 @@ function FreehandTool() {
   };
 
   this.unselectTool = function() {
-		updatePixels();
+		//updatePixels();
 		//clear options
 		select(".options").html("");
   }

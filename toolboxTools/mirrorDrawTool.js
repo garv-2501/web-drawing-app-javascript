@@ -110,7 +110,7 @@ function MirrorDrawTool() {
   //when the tool is deselected update the pixels to just show the drawing and
   //hide the line of symmetry. Also clear options
   this.unselectTool = function () {
-    updatePixels();
+    //updatePixels();
     //clear options
     select(".options").html("");
   };
