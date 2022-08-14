@@ -1,6 +1,6 @@
 function StampTool() {
   // set an icon and a name for the object
-  this.name = "stamp";
+  this.name = "Stamp Tool";
   this.icon = "assets/stampTool.png";
 
   this.stampSize = 20;
@@ -11,7 +11,7 @@ function StampTool() {
   let self = this;
 
   this.draw = function () {
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       let stampX = mouseX - self.stampSize / 2;
       let stampY = mouseY - self.stampSize / 2;
       image(star, stampX, stampY, self.stampSize, self.stampSize);

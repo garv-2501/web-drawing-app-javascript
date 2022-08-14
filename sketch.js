@@ -4,30 +4,39 @@ let toolbox = null;
 let colourP = null;
 let helpers = null;
 
-// Preloading the star image for the stamp tool
+// Variable to store the main canvas
+let c;
+
+// Preloading all images for the stamp tool
 let star;
+let cloud;
+let grass;
+let smoke;
+let rain;
+
+// Preload function for the stamp tool images
 function preload() {
   star = loadImage("./assets/star.jpeg");
 }
 
+// Setup function, runs once
 function setup() {
-  //create a canvas to fill the content div from index.html
+  // Canvas to fill the content div from index.html
   canvasContainer = select("#content");
-  let c = createCanvas(
-    canvasContainer.size().width,
+  c = createCanvas(
+    canvasContainer.size().width + 15,
     canvasContainer.size().height
   );
-  background(255)
   c.parent("content");
 
-  //create helper functions and the colour palette
+  // Helper and color palette functions
   helpers = new HelperFunctions();
   colourP = new ColourPalette();
 
-  //create a toolbox for storing the tools
+  // For storing all the tools in the sidebar
   toolbox = new Toolbox();
 
-  //add the tools to the toolbox.
+  // The tools to the toolbox.
   toolbox.addTool(new FreehandTool());
   toolbox.addTool(new EraserTool());
   toolbox.addTool(new LineToTool());
@@ -36,6 +45,11 @@ function setup() {
   toolbox.addTool(new StampTool());
   toolbox.addTool(new RectTool());
   toolbox.addTool(new EllipseTool());
+  toolbox.addTool(new EditableShapeTool())
+  toolbox.addTool(new ScissorTool())
+
+  // Background of the canvas
+  background(255)
 }
 
 function draw() {
@@ -46,5 +60,18 @@ function draw() {
   } else {
     alert("it doesn't look like your tool has a draw method!");
   }
-  
+}
+
+function mousePressed() {
+	// Call the mousePressed function from the selected tool.
+	if (toolbox.selectedTool.hasOwnProperty("mousePressed")) {
+		toolbox.selectedTool.mousePressed();
+	}
+}
+
+function mouseDragged(){
+	// Call the mouseDragged function from the selected tool.
+	if (toolbox.selectedTool.hasOwnProperty("mouseDragged")) {
+		toolbox.selectedTool.mouseDragged();
+	}
 }

@@ -1,7 +1,7 @@
 function FreehandTool() {
   // set an icon and a name for the object
-  this.name = "freehand";
-  this.icon = "assets/freehand.png";
+  this.name = "Freehand Tool";
+  this.icon = "assets/freehandTool.png";
   
   this.FreehandThickness = 5;
 
@@ -15,7 +15,7 @@ function FreehandTool() {
 
   this.draw = function () {
     // if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if they previousX and Y are -1. set them to the current
       // mouse X and Y if they are.
       if (previousMouseX == -1) {
@@ -39,6 +39,12 @@ function FreehandTool() {
       previousMouseY = -1;
     }
   };
+
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
 
   //adds a button and click handler to the options area. When clicked
   //toggle the line of symmetry between horizonatl to vertical

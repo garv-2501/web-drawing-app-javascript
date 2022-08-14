@@ -1,6 +1,6 @@
 function MirrorDrawTool() {
-  this.name = "mirrorDraw";
-  this.icon = "assets/mirrorDraw.png";
+  this.name = "Mirror Tool";
+  this.icon = "assets/mirrorDrawTool.png";
 
   //which axis is being mirrored (x or y) x is default
   this.axis = "x";
@@ -25,7 +25,7 @@ function MirrorDrawTool() {
     updatePixels();
 
     //do the drawing if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       //if the previous values are -1 set them to the current mouse location
       //and mirrored positions
       if (previousMouseX == -1) {
@@ -110,7 +110,7 @@ function MirrorDrawTool() {
   //when the tool is deselected update the pixels to just show the drawing and
   //hide the line of symmetry. Also clear options
   this.unselectTool = function () {
-    updatePixels();
+    //updatePixels();
     //clear options
     select(".options").html("");
   };
@@ -119,7 +119,7 @@ function MirrorDrawTool() {
   //toggle the line of symmetry between horizonatl to vertical
   this.populateOptions = function () {
     select(".options").html(
-      "<button id='directionButton' class='headButton'>Make Horizontal</button>"
+      "<button class='headButton' id='directionButton'>Make Horizontal</button>"
     );
     // 	//click handler
     select("#directionButton").mouseClicked(function () {

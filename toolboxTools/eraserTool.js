@@ -1,7 +1,7 @@
 function EraserTool() {
   // set an icon and a name for the object
+  this.name = "Eraser Tool";
   this.icon = "assets/eraserTool.png";
-  this.name = "eraser";
 
   this.eraserThickness = 50;
   // to smoothly draw we'll draw a line from the previous mouse location
@@ -14,7 +14,7 @@ function EraserTool() {
 
   this.draw = function () {
     
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if they previousX and Y are -1. set them to the current
       // mouse X and Y if they are.
       if (previousMouseX == -1) {
@@ -56,6 +56,12 @@ function EraserTool() {
       ellipse(mouseX, mouseY, self.eraserThickness)
     }
   };
+
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
 
   //adds a button and click handler to the options area. When clicked
   //toggle the line of symmetry between horizonatl to vertical

@@ -1,7 +1,7 @@
 function LineToTool() {
   // set an icon and a name for the object
-  this.name = "lineTo";
-  this.icon = "assets/lineTo.png";
+  this.name = "Line Tool";
+  this.icon = "assets/lineTool.png";
 
   this.lineThickness = 2;
 
@@ -17,7 +17,7 @@ function LineToTool() {
 
   this.draw = function () {
     // if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if starting X and Y are -1. If yes, set them to
       // current mouse X and Y.
       if (startMouseX == -1) {
@@ -46,6 +46,12 @@ function LineToTool() {
       startMouseY = -1;
     }
   };
+
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
 
   this.populateOptions = function () {
     let optionsHTML = {

@@ -1,6 +1,6 @@
 function RectTool() {
   // set an icon and a name for the object
-  this.name = "rect";
+  this.name = "Rect Tool";
   this.icon = "assets/rectTool.png";
 
   this.rectThickness = 2;
@@ -17,7 +17,7 @@ function RectTool() {
 
   this.draw = function () {
     // if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if starting X and Y are -1. If yes, set them to
       // current mouse X and Y.
       if (startMouseX == -1) {
@@ -76,6 +76,12 @@ function RectTool() {
       startMouseY = -1;
     }
   };
+
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
 
   this.populateOptions = function () {
     let optionsHTML = {

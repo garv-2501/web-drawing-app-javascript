@@ -1,7 +1,7 @@
 function SprayCanTool() {
   // set an icon and a name for the object
-  this.name = "sprayCanTool";
-  this.icon = "assets/sprayCan.png";
+  this.name = "sprayCan Tool";
+  this.icon = "assets/sprayCanTool.png";
   // set the number of points and the spread of the spray
   this.sprayThickness = 2;
   this.sprayPoints = 13;
@@ -13,7 +13,7 @@ function SprayCanTool() {
     //if the mouse is pressed paint on the canvas
     //spread describes how far to spread the paint from the mouse pointer
     //points holds how many pixels of paint for each mouse press.
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       for (let i = 0; i < self.sprayPoints; i++) {
         strokeWeight(self.sprayThickness);
         point(
@@ -23,6 +23,12 @@ function SprayCanTool() {
       }
     }
   };
+
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
 
   this.populateOptions = function () {
     let optionsHTML = {

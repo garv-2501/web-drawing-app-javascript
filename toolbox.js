@@ -72,6 +72,10 @@ function Toolbox() {
           if (this.selectedTool.hasOwnProperty("populateOptions")) {
             this.selectedTool.populateOptions();
           }
+          //if the tool has an options area. Populate it now.
+          if (this.selectedTool.hasOwnProperty("setup")) {
+            this.selectedTool.setup();
+          }
         }
       }
     };

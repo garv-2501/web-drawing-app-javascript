@@ -1,6 +1,6 @@
 function EllipseTool() {
   // set an icon and a name for the object
-  this.name = "ellipse";
+  this.name = "Ellipse Tool";
   this.icon = "assets/ellipseTool.png";
 
   // We will be making a line from the previous point to the
@@ -17,7 +17,7 @@ function EllipseTool() {
 
   this.draw = function () {
     // if the mouse is pressed
-    if (mouseIsPressed) {
+    if (mouseIsPressed && mousePressOnCanvas(c)) {
       // check if starting X and Y are -1. If yes, set them to
       // current mouse X and Y.
       if (startMouseX == -1) {
@@ -82,6 +82,11 @@ function EllipseTool() {
     }
   };
 
+  this.unselectTool = function() {
+		//updatePixels();
+		//clear options
+		select(".options").html("");
+  }
   
   //adds a button and click handler to the options area. When clicked
   //toggle the line of symmetry between horizonatl to vertical
