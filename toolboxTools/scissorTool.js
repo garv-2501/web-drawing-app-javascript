@@ -26,6 +26,7 @@ function ScissorTool() {
         updatePixels();
         selectedPixels = get(selectedArea.x, selectedArea.y, selectedArea.w, selectedArea.h)
       } else {
+        loadPixels();
         selectMode = 0;
         selectedArea = {x:0, y:0, w:10, h:10};
         scissorButton.html("cut selected area")
@@ -66,6 +67,7 @@ function ScissorTool() {
       selectedArea.h = h;
     }
     if (selectMode == 1) {
+      let c = 0
       updatePixels();
       push();
       fill(255);
