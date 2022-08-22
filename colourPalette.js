@@ -1,5 +1,6 @@
 //Displays and handles the colour palette.
 function ColourPalette() {
+  let a = 20;  // alpha value for the color
     //a list of web colour strings
     this.colours = [
       "black",

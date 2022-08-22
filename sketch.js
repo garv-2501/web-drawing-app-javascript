@@ -38,6 +38,7 @@ function setup() {
 
   // The tools to the toolbox.
   toolbox.addTool(new FreehandTool());
+  toolbox.addTool(new PaintBrushTool());
   toolbox.addTool(new EraserTool());
   toolbox.addTool(new LineToTool());
   toolbox.addTool(new SprayCanTool());
@@ -45,8 +46,8 @@ function setup() {
   toolbox.addTool(new StampTool());
   toolbox.addTool(new RectTool());
   toolbox.addTool(new EllipseTool());
-  toolbox.addTool(new EditableShapeTool())
-  toolbox.addTool(new ScissorTool())
+  toolbox.addTool(new EditableShapeTool());
+  toolbox.addTool(new ScissorTool());
 
   // Background of the canvas
   background(255)
