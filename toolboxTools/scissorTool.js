@@ -3,10 +3,14 @@ function ScissorTool() {
     this.name = "Scissor Tool";
     this.icon = "assets/scissorTool.png";
 
-    let selectButton;
+    // ------------------------------------------------
+
+    let scissorButton;
     let selectMode;
     let selectedArea;
     let selectedPixels;
+
+    // ------------------------------------------------
 
     this.setup = function () {
         selectMode = 0;
@@ -15,7 +19,8 @@ function ScissorTool() {
         // Main button for the scissorTool
         scissorButton = createButton("cut selected area");
         scissorButton.parent("#scissorButton");
-        scissorButton.class(".headButton");
+        scissorButton.class("headButton");
+
         loadPixels();
         scissorButton.mousePressed(function () {
             if (selectMode == 0) {
@@ -37,6 +42,8 @@ function ScissorTool() {
         });
     };
 
+    // ------------------------------------------------
+
     this.draw = function () {
         if (mouseIsPressed) {
             if (selectMode == 0) {
@@ -55,6 +62,8 @@ function ScissorTool() {
         }
     };
 
+    // ------------------------------------------------
+
     this.mousePressed = function () {
         if (selectMode == 0) {
             selectedArea.x = mouseX;
@@ -63,6 +72,8 @@ function ScissorTool() {
             selectedArea.w = 0;
         }
     };
+
+    // ------------------------------------------------
 
     this.mouseDragged = function () {
         if (selectMode == 0) {
@@ -93,12 +104,16 @@ function ScissorTool() {
         }
     };
 
+    // ------------------------------------------------
+
     // clears populate options when tool is unselected
     this.unselectTool = function () {
         //updatePixels();
         //clear options
         select(".options").html("");
     };
+
+    // ------------------------------------------------
 
     this.populateOptions = function () {
         select(".options").html("<div id='scissorButton'></div>");

@@ -38,6 +38,7 @@ function setup() {
 
     // The tools to the toolbox.
     toolbox.addTool(new FreehandTool());
+    toolbox.addTool(new SmoothLineTool());
     toolbox.addTool(new PaintBrushTool());
     toolbox.addTool(new EraserTool());
     toolbox.addTool(new LineToTool());

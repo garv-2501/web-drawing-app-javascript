@@ -1,22 +1,19 @@
-function FreehandTool() {
+function SmoothLineTool() {
     // set an icon and a name for the object
-    this.name = "Freehand Tool";
-    this.icon = "assets/freehandTool.png";
+    this.name = "Smooth Line Tool";
+    this.icon = "assets/smoothLineTool.png";
     this.FreehandThickness = 5;
 
     // ------------------------------------------------
 
-    // for smooth drawing, we will create a line between each registered mouse coord.
-    // and the previous mouse coord. Hence, will use previousMouseX and Y to store these coord.
-    let previousMouseX;
-    let previousMouseY;
+    // Stores all points of a line
+    let lineArray;
     let self;
 
     // ------------------------------------------------
 
     this.setup = function () {
-        previousMouseX = -1;
-        previousMouseY = -1;
+        lineArray = [{ x: -1, y: -1 }];
         self = this;
     };
 
@@ -25,27 +22,24 @@ function FreehandTool() {
     this.draw = function () {
         // if the mouse is pressed
         if (mouseIsPressed && mousePressOnCanvas(c)) {
-            // check if they previousX and Y are -1. set them to the current
-            // mouse X and Y if they are.
-            if (previousMouseX == -1) {
-                previousMouseX = mouseX;
-                previousMouseY = mouseY;
+            if (lineArray[lineArray.length - 1].x != mouseX) {
+                lineArray.push({ x: mouseX, y: mouseY });
+                console.log(lineArray);
             }
-            // if we already have values for previousX and Y we can draw a line from
-            // there to the current mouse location
-            else {
-                strokeWeight(self.FreehandThickness);
-                line(previousMouseX, previousMouseY, mouseX, mouseY);
-                previousMouseX = mouseX;
-                previousMouseY = mouseY;
+
+            strokeWeight(self.FreehandThickness);
+            noFill();
+            beginShape();
+            for (let i = 1; i < lineArray.length; i++) {
+                curveVertex(lineArray[i].x, lineArray[i].y);
             }
+            endShape();
         }
         // if the user has released the mouse we want to set the previousMouse values
         // back to -1.
         // try and comment out these lines and see what happens!
         else {
-            previousMouseX = -1;
-            previousMouseY = -1;
+            lineArray = [{ x: -1, y: -1 }];
         }
     };
 
