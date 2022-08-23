@@ -1,6 +1,5 @@
 //Displays and handles the colour palette.
 function ColourPalette() {
-    let a = 20; // alpha value for the color
     //a list of web colour strings
     this.colours = [
         "black",
@@ -70,4 +69,47 @@ function ColourPalette() {
     };
     //call the loadColours function now it is declared
     this.loadColours();
+
+    // ------------------------------------------------------
+
+    // function to convert colour values in colour array from string format to rgb format (for paintBrushTool)
+    this.convertColourVal = function (val, alphaVal) {
+        if (val == "black") {
+            return color(0, alphaVal);
+        } else if (val == "silver") {
+            return color(192, alphaVal);
+        } else if (val == "gray") {
+            return color(128, alphaVal);
+        } else if (val == "white") {
+            return color(255, alphaVal);
+        } else if (val == "maroon") {
+            return color(128, 0, 0, alphaVal);
+        } else if (val == "red") {
+            return color(255, 0, 0, alphaVal);
+        } else if (val == "purple") {
+            return color(128, 0, 128, alphaVal);
+        } else if (val == "orange") {
+            return color(255, 165, 0, alphaVal);
+        } else if (val == "pink") {
+            return color(255, 192, 203, alphaVal);
+        } else if (val == "fuchsia") {
+            return color(255, 0, 255, alphaVal);
+        } else if (val == "green") {
+            return color(0, 128, 0, alphaVal);
+        } else if (val == "lime") {
+            return color(0, 255, 0, alphaVal);
+        } else if (val == "olive") {
+            return color(128, 128, 0, alphaVal);
+        } else if (val == "yellow") {
+            return color(255, 255, 0, alphaVal);
+        } else if (val == "navy") {
+            return color(0, 0, 128, alphaVal);
+        } else if (val == "blue") {
+            return color(0, 0, 255, alphaVal);
+        } else if (val == "teal") {
+            return color(0, 128, 128, alphaVal);
+        } else if (val == "aqua") {
+            return color(0, 255, 255, alphaVal);
+        }
+    };
 }
