@@ -2,7 +2,6 @@ function FreehandTool() {
     // set an icon and a name for the object
     this.name = "Freehand Tool";
     this.icon = "assets/freehandTool.png";
-    this.FreehandThickness = 5;
 
     // ------------------------------------------------
 
@@ -12,12 +11,22 @@ function FreehandTool() {
     let previousMouseY;
     let self;
 
+    // Sliders for the options menu:
+    let sizeSlider;
+    let opacitySlider;
+
     // ------------------------------------------------
 
     this.setup = function () {
         previousMouseX = -1;
         previousMouseY = -1;
         self = this;
+
+        // Slider for the freehandTool in the options menu
+        sizeSlider = createSlider(1, 100, 5);
+        sizeSlider.parent("#freehand-sliders");
+        opacitySlider = createSlider(1, 100, 100);
+        opacitySlider.parent("#freehand-sliders");
     };
 
     // ------------------------------------------------
@@ -34,7 +43,13 @@ function FreehandTool() {
             // if we already have values for previousX and Y we can draw a line from
             // there to the current mouse location
             else {
-                strokeWeight(self.FreehandThickness);
+                strokeWeight(sizeSlider.value());
+                let colourVal;
+                colourVal = colourP.convertColourVal(
+                    colourP.selectedColour,
+                    255
+                );
+                stroke(colourVal);
                 line(previousMouseX, previousMouseY, mouseX, mouseY);
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;
@@ -61,38 +76,6 @@ function FreehandTool() {
     //adds a button and click handler to the options area. When clicked
     //toggle the line of symmetry between horizonatl to vertical
     this.populateOptions = function () {
-        let optionsHTML = {
-            penSizePrompt:
-                "<label for='input' class='options-label'>Pen Thickness:</label>",
-            penSizeInput:
-                "<form class='increase-decrease-input'>  <div class='value-button' id='freehand-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='freehand-number-input' value='2'/>  <div class='value-button' id='freehand-increase' value='Increase Value'>+</div>  </form>",
-        };
-        select(".options").html(
-            optionsHTML.penSizePrompt + optionsHTML.penSizeInput
-        );
-        // Click handler
-        // increase
-        select("#freehand-increase").mouseClicked(function () {
-            let value = parseInt(
-                document.getElementById("freehand-number-input").value,
-                10
-            );
-            value = isNaN(value) ? 0 : value;
-            value++;
-            document.getElementById("freehand-number-input").value = value;
-            self.FreehandThickness = value;
-        });
-        //click handler
-        select("#freehand-decrease").mouseClicked(function () {
-            value = parseInt(
-                document.getElementById("freehand-number-input").value,
-                10
-            );
-            value = isNaN(value) ? 1 : value;
-            value < 2 ? (value = 2) : "";
-            value--;
-            document.getElementById("freehand-number-input").value = value;
-            self.FreehandThickness = value;
-        });
+        select(".options").html("<div id='freehand-sliders'></div>");
     };
 }

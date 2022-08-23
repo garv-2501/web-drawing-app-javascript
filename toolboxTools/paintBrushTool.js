@@ -3,13 +3,28 @@ function PaintBrushTool() {
     this.name = "Paint Brush Tool";
     this.icon = "assets/paintBrushTool.png";
 
+    // ------------------------------------------------
+
     let lineArray;
-    let orignalRadius = 50;
-    let mainButton;
+    let orignalRadius;
+
+    // Sliders for the options menu:
+    let sizeSlider;
+    let opacitySlider;
+
+    // ------------------------------------------------
 
     this.setup = function () {
         lineArray = [{ x: -1, y: -1 }];
+
+        // Slider for the paintBrushTool in the options menu
+        sizeSlider = createSlider(30, 100, 50, 2);
+        sizeSlider.parent("#paintBrush-sliders");
+        opacitySlider = createSlider(1, 60, 3, 1);
+        opacitySlider.parent("#paintBrush-sliders");
     };
+
+    // ------------------------------------------------
 
     this.draw = function () {
         // if the mouse is pressed
@@ -18,8 +33,13 @@ function PaintBrushTool() {
                 lineArray.push({ x: mouseX, y: mouseY });
             }
 
-            colourVal = colourP.convertColourVal(colourP.selectedColour, 3);
+            let colourVal;
+            colourVal = colourP.convertColourVal(
+                colourP.selectedColour,
+                opacitySlider.value()
+            );
             fill(colourVal);
+            orignalRadius = sizeSlider.value();
             strokeWeight(orignalRadius);
             for (let i = 1; i < lineArray.length; i++) {
                 paintStroke(lineArray[i].x, lineArray[i].y);
@@ -32,6 +52,8 @@ function PaintBrushTool() {
             lineArray = [{ x: -1, y: -1 }];
         }
     };
+
+    // ------------------------------------------------
 
     function paintStroke(startX, startY) {
         noStroke();
@@ -55,14 +77,17 @@ function PaintBrushTool() {
         }
     }
 
+    // ------------------------------------------------
+
     // clears populate options when tool is unselected
     this.unselectTool = function () {
-        //updatePixels();
         //clear options
         select(".options").html("");
     };
 
+    // ------------------------------------------------
+
     this.populateOptions = function () {
-        select(".options").html("<div id='scissorButton'></div>");
+        select(".options").html("<div id='paintBrush-sliders'></div>");
     };
 }

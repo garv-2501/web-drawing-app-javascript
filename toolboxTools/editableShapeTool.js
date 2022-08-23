@@ -3,8 +3,19 @@ function EditableShapeTool() {
     this.name = "Editable Shape Tool";
     this.icon = "assets/editableShapeTool.png";
 
-    let editMode = false;
-    let currentShape = [];
+    // ------------------------------------------------
+
+    let editMode;
+    let currentShape;
+
+    // ------------------------------------------------
+
+    this.setup = function () {
+        editMode = false;
+        currentShape = [];
+    };
+
+    // ------------------------------------------------
 
     this.draw = function () {
         noFill();
@@ -46,11 +57,15 @@ function EditableShapeTool() {
         endShape();
     };
 
+    // ------------------------------------------------
+
     this.unselectTool = function () {
         //updatePixels();
         //clear options
         select(".options").html("");
     };
+
+    // ------------------------------------------------
 
     this.populateOptions = function () {
         let optionsHTML = {
@@ -85,6 +100,8 @@ function EditableShapeTool() {
             currentShape = [];
         });
     };
+
+    // ------------------------------------------------
 
     // To not let mousePress outside of canvas affect things in the canvas
     function mousePressOnCanvas(canvas) {

@@ -2,18 +2,27 @@ function EllipseTool() {
     // set an icon and a name for the object
     this.name = "Ellipse Tool";
     this.icon = "assets/ellipseTool.png";
-
-    // We will be making a line from the previous point to the
-    // new point.The following values store the location of the
-    // starting point of the line. -1 shows that we haven't added a
-    // starting point. The drawing variable is a boolean
-    // which stores if the line is drawing or not.
     this.ellipseThickness = 10;
-    let startMouseX = -1;
-    let startMouseY = -1;
-    let drawing = false;
 
-    let self = this;
+    // ------------------------------------------------
+
+    let startMouseX;
+    let startMouseY;
+    let drawing;
+
+    let self;
+
+    // ------------------------------------------------
+
+    this.setup = function () {
+        startMouseX = -1;
+        startMouseY = -1;
+        drawing = false;
+
+        self = this;
+    };
+
+    // ------------------------------------------------
 
     this.draw = function () {
         // if the mouse is pressed
@@ -34,6 +43,12 @@ function EllipseTool() {
                 // and then draw a line with starting X and Y and the current mouse X and Y
                 updatePixels();
                 strokeWeight(self.ellipseThickness);
+                let colourVal;
+                colourVal = colourP.convertColourVal(
+                    colourP.selectedColour,
+                    255
+                );
+                stroke(colourVal);
                 noFill();
                 if (startMouseX - mouseX > 0) {
                     if (startMouseY - mouseY > 0) {
@@ -72,7 +87,6 @@ function EllipseTool() {
                 }
             }
         }
-
         // When the drawing is done, this is revert back the drawing state to false
         // and make the starting X and Y -1.
         else if (drawing) {
@@ -82,11 +96,15 @@ function EllipseTool() {
         }
     };
 
+    // ------------------------------------------------
+
     this.unselectTool = function () {
         //updatePixels();
         //clear options
         select(".options").html("");
     };
+
+    // ------------------------------------------------
 
     //adds a button and click handler to the options area. When clicked
     //toggle the line of symmetry between horizonatl to vertical

@@ -39,6 +39,12 @@ function MirrorDrawTool() {
             //draw a line between them and the current positions
             else {
                 strokeWeight(5);
+                let colourVal;
+                colourVal = colourP.convertColourVal(
+                    colourP.selectedColour,
+                    255
+                );
+                stroke(colourVal);
                 line(previousMouseX, previousMouseY, mouseX, mouseY);
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;

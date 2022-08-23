@@ -33,6 +33,12 @@ function RectTool() {
                 // This will update the screen with the new line when the mouse is released
                 // and then draw a line with starting X and Y and the current mouse X and Y
                 updatePixels();
+                let colourVal;
+                colourVal = colourP.convertColourVal(
+                    colourP.selectedColour,
+                    255
+                );
+                stroke(colourVal);
                 strokeWeight(self.rectThickness);
                 noFill();
                 if (startMouseX - mouseX > 0) {

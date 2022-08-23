@@ -5,10 +5,12 @@ function ScissorTool() {
 
     // ------------------------------------------------
 
-    let scissorButton;
     let selectMode;
     let selectedArea;
     let selectedPixels;
+
+    // Buttons for the options menu:
+    let scissorButton;
 
     // ------------------------------------------------
 
@@ -108,7 +110,6 @@ function ScissorTool() {
 
     // clears populate options when tool is unselected
     this.unselectTool = function () {
-        //updatePixels();
         //clear options
         select(".options").html("");
     };

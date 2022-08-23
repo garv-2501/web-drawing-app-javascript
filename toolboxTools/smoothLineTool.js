@@ -24,10 +24,12 @@ function SmoothLineTool() {
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             if (lineArray[lineArray.length - 1].x != mouseX) {
                 lineArray.push({ x: mouseX, y: mouseY });
-                console.log(lineArray);
             }
 
             strokeWeight(self.FreehandThickness);
+            let colourVal;
+            colourVal = colourP.convertColourVal(colourP.selectedColour, 255);
+            stroke(colourVal);
             noFill();
             beginShape();
             for (let i = 1; i < lineArray.length; i++) {

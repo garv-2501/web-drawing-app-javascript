@@ -16,6 +16,12 @@ function SprayCanTool() {
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             for (let i = 0; i < self.sprayPoints; i++) {
                 strokeWeight(self.sprayThickness);
+                let colourVal;
+                colourVal = colourP.convertColourVal(
+                    colourP.selectedColour,
+                    255
+                );
+                stroke(colourVal);
                 point(
                     random(
                         mouseX - self.spraySpread,
