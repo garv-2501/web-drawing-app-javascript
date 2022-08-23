@@ -1,143 +1,139 @@
 html,
 body {
-  margin: 0px;
-  height: 100%;
+    margin: 0px;
+    height: 100%;
 }
 
 @font-face {
-  font-family: brussel;
-  src: url(assets/brusselsCity.otf);
+    font-family: brussel;
+    src: url(assets/brusselsCity.otf);
 }
 
 /* Using css grid to give the drawing app a layout */
 .wrapper {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 60px 395px minmax(500px, 1fr);
-  grid-template-rows: 50px minmax(500px, 1fr) 115px;
-  grid-template-areas:
-    "header header header"
-    "sidebar content content"
-    "colourP colourP options";
-  background-color: #fff;
-  color: rgb(36, 36, 36);
+    display: grid;
+    height: 100%;
+    grid-template-columns: 60px 395px minmax(500px, 1fr);
+    grid-template-rows: 50px minmax(500px, 1fr) 115px;
+    grid-template-areas:
+        "header header header"
+        "sidebar content content"
+        "colourP colourP options";
+    background-color: #fff;
+    color: rgb(36, 36, 36);
 }
 
 /* Styling of all boxes except the canvas in the drawing app */
 .box {
-  background-color: rgb(54, 54, 54);
-  color: #fff;
-  font-size: 150%;
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+    font-size: 150%;
 }
 
 /* ------------------- */
 /* CSS for the header of the drawing app */
 /* ------------------- */
 .header {
-  grid-area: header;
-  font-family: Helvetica, sans-serif;
-  border-bottom: solid;
-  border-color: rgb(100, 100, 100);
-  border-width: 1px;
+    grid-area: header;
+    font-family: Helvetica, sans-serif;
+    border-bottom: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
 
-  /* disable text selection */
-  -webkit-user-select: none;
-  -ms-user-select: none; 
-  user-select: none; 
+    /* disable text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 /* CSS for the buttons in the header box */
 .headButton {
-  background-color: rgb(32, 32, 32);
-  border-radius: 4px;
-  border-style: none;
-  color: #fff;
-  cursor: pointer;
-  font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  margin: 0;
-  padding: 9px 20px 8px;
-  position: relative;
-  top: -5px;
-  text-align: center;
-
-
+    background-color: rgb(32, 32, 32);
+    border-radius: 4px;
+    border-style: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    padding: 9px 20px 8px;
+    position: relative;
+    top: -5px;
+    text-align: center;
 }
 .headButton:hover {
-  opacity: 0.75;
+    opacity: 0.75;
 }
 /* CSS for the app name display in the header box */
 #appName {
-  font-size: 32px;
-  font-family: brussel;
-  display: inline-block;
-  margin: 10px 30px 0 10px;
-  padding-right: 30px;
-  border-right: solid;
-  border-color: rgb(100, 100, 100);
-  border-width: 1px;
+    font-size: 32px;
+    font-family: brussel;
+    display: inline-block;
+    margin: 10px 30px 0 10px;
+    padding-right: 30px;
+    border-right: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
 }
 
 /* ------------------- */
 /* CSS for the sidebar with the tool icons */
 /* ------------------- */
 #sidebar {
-  grid-area: sidebar;
-  border-bottom: solid;
-  border-color: rgb(100, 100, 100);
-  border-width: 1px;
+    grid-area: sidebar;
+    border-bottom: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
 
-  /* disable text selection */
-  -webkit-user-select: none;
-  -ms-user-select: none; 
-  user-select: none; 
+    /* disable text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 /* CSS for the icons in the sidebar */
 .sideBarItem {
-  max-height: 50px;
-  max-width: 50px;
-  padding: 5px;
+    max-height: 50px;
+    max-width: 50px;
+    padding: 5px;
 }
 .sideBarItem img {
-  max-height: 50px;
-  max-width: 50px;
-  cursor: pointer;
+    max-height: 50px;
+    max-width: 50px;
+    cursor: pointer;
 }
 .sideBarItem :hover {
-  border: solid;
-  border-color: rgb(107, 107, 107);
+    border: solid;
+    border-color: rgb(107, 107, 107);
 }
 /* CSS for sidebar icon tooltips */
 .tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px black;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px black;
 }
 .tooltip .tooltip-text {
-  visibility: hidden;
-  width: 100px;
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  background-color: rgb(42, 42, 42);
-  border-radius: 5px;
-  padding: 5px 0;
+    visibility: hidden;
+    width: 100px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgb(42, 42, 42);
+    border-radius: 5px;
+    padding: 5px 0;
 
-  
-
-  position: absolute;
-  z-index: 1;
+    position: absolute;
+    z-index: 1;
 }
 .tooltip:hover .tooltip-text {
-  visibility: visible;
-  transition-delay: 300ms;
+    visibility: visible;
+    transition-delay: 300ms;
 }
 
 /* ------------------- */
 /* CSS for the convas */
 /* ------------------- */
 #content {
-  grid-area: content;
+    grid-area: content;
 }
 
 /* ------------------- */
@@ -145,94 +141,94 @@ body {
 /* ------------------- */
 
 .colourPalette {
-  grid-area: colourP;
-  display: flex;
-  flex-direction: grid;
-  flex-flow: wrap;
-  border-right: solid;
-  border-color: rgb(100, 100, 100);
-  border-width: 1px;
+    grid-area: colourP;
+    display: flex;
+    flex-direction: grid;
+    flex-flow: wrap;
+    border-right: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
 }
 .colourPalette :hover {
-  border: solid;
-  border-color: rgb(107, 107, 107);
+    border: solid;
+    border-color: rgb(107, 107, 107);
 }
 /* CSS for each swatch in the colour palette */
 .colourSwatches {
-  box-sizing: border-box;
-  border-radius: 10px;
-  width: 40px;
-  height: 40px;
-  max-height: 40px;
-  max-width: 40px;
-  margin: 10px 5px 5px 5px;
-  cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    max-height: 40px;
+    max-width: 40px;
+    margin: 10px 5px 5px 5px;
+    cursor: pointer;
 }
 
 /* ------------------- */
 /* CSS for the options box */
 /* ------------------- */
 .options {
-  grid-area: options;
-  padding: 5px;
+    grid-area: options;
+    padding: 5px;
 
-  /* disable text selection */
-  -webkit-user-select: none;
-  -ms-user-select: none; 
-  user-select: none; 
+    /* disable text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 /* CSS for the directionButton in the mirrorDrawTool */
 #directionButton {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 /* CSS for the pen size input buttons used in almost all tools */
 /* From "https://codepen.io/mtbroomell/pen/yNwwdv" */
 .options-label {
-  display: inline-block;
-  margin-right: 10px;
-  font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
-  padding-bottom: 3px;
+    display: inline-block;
+    margin-right: 10px;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    padding-bottom: 3px;
 }
 .increase-decrease-input {
-  display: inline-block;
-  position: relative;
-  padding-bottom: 3px;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 3px;
 }
 .value-button {
-  display: inline-block;
-  color: #fff;
-  font-size: 27px;
-  border-radius:20px;
-  height: 20px;
-  width: 35px;
-  text-align: center;
-  vertical-align: middle;
-  padding-bottom: 10px;
-  background-color: rgb(32, 32, 32);
-  cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 27px;
+    border-radius: 20px;
+    height: 20px;
+    width: 35px;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 10px;
+    background-color: rgb(32, 32, 32);
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .value-button:hover {
-  opacity: 0.75
+    opacity: 0.75;
 }
 .number-input {
-  border-radius: 10px;
-  height: 25px;
-  width: 60px;
+    border-radius: 10px;
+    height: 25px;
+    width: 60px;
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Buttons for the editable tool */
 #finishButton {
-  margin-top: 12px;
-  margin-bottom: 10px;
+    margin-top: 12px;
+    margin-bottom: 10px;
 }
