@@ -27,7 +27,7 @@ function ScissorTool() {
         scissorButton.mousePressed(function () {
             if (selectMode == 0) {
                 selectMode = 1;
-                scissorButton.html("select area");
+                scissorButton.html("Paste & select area");
                 updatePixels();
                 selectedPixels = get(
                     selectedArea.x,
@@ -36,10 +36,10 @@ function ScissorTool() {
                     selectedArea.h
                 );
             } else {
-                loadPixels();
                 selectMode = 0;
                 selectedArea = { x: 0, y: 0, w: 10, h: 10 };
-                scissorButton.html("cut selected area");
+                scissorButton.html("cut selected new area");
+                loadPixels();
             }
         });
     };
@@ -85,12 +85,12 @@ function ScissorTool() {
             selectedArea.w = w;
             selectedArea.h = h;
         }
+
         if (selectMode == 1) {
-            let c = 0;
-            updatePixels();
             push();
             fill(255);
             noStroke();
+            updatePixels();
             rect(
                 selectedArea.x,
                 selectedArea.y,

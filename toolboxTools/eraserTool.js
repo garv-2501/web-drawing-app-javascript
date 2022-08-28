@@ -9,32 +9,65 @@ function EraserTool() {
     // and the previous mouse coord. Hence, will use previousMouseX and Y to store these coord.
     let previousMouseX;
     let previousMouseY;
+    // To store the slider values
+    let sizeValue = 50;
 
     let self;
-
-    // Slider for the options menu:
-    let sizeSlider;
-    let opacitySlider;
 
     // ------------------------------------------------
 
     this.setup = function () {
+        // Slider for the options menu:
+        this.sizeSlider = createSlider(1, 200, sizeValue, 1);
+
+        // Initialising previous (x, y) position
         previousMouseX = -1;
         previousMouseY = -1;
 
         self = this;
 
         // Slider for the eraser in the options menu
-        sizeSlider = createSlider(2, 200, 40);
-        sizeSlider.parent("#eraser-sliders");
-        opacitySlider = createSlider(1, 100, 100);
-        opacitySlider.parent("#eraser-sliders");
+        self.sizeSlider.parent("#eraser-sliders");
+        self.sizeSlider.addClass("tool-sliders");
     };
 
     // ------------------------------------------------
 
     this.draw = function () {
-        if (mouseIsPressed && mousePressOnCanvas(c)) {
+        if (!mouseIsPressed) {
+            // if the user released the mouse, set the previousMouse values to -1
+            previousMouseX = -1;
+            previousMouseY = -1;
+
+            if (mousePressOnCanvas(c)) {
+                // Update the eraser border
+                updatePixels();
+                push();
+                noFill();
+                strokeWeight(1);
+                stroke(0);
+                ellipse(mouseX, mouseY, self.sizeSlider.value());
+            }
+        }
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("eraser-sizeSliderInput").value =
+            self.sizeSlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
+    };
+
+    // ------------------------------------------------
+
+    // To erase the border mark left by eraser when selecting a different tool
+    this.mousePressed = function () {
+        if (!mousePressOnCanvas(c)) {
+            updatePixels();
+        }
+    };
+
+    this.mouseDragged = function () {
+        if (mousePressOnCanvas(c)) {
             // check if they previousX and Y are -1. set them to the current
             // mouse X and Y if they are.
             if (previousMouseX == -1) {
@@ -45,34 +78,25 @@ function EraserTool() {
             // there to the current mouse location
             else {
                 push();
-                strokeWeight(sizeSlider.value() + 10);
-                stroke(255, (opacitySlider.value() / 100) * 255);
+                // Added a fraction of the value so the eraser does not leave marks
+                strokeWeight(
+                    self.sizeSlider.value() + self.sizeSlider.value() / 5
+                );
+                stroke(255);
                 line(previousMouseX, previousMouseY, mouseX, mouseY);
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;
                 pop();
             }
+
+            // For the eraser border
             loadPixels();
             push();
             noFill();
             strokeWeight(1);
             stroke(0);
-            ellipse(mouseX, mouseY, sizeSlider.value());
+            ellipse(mouseX, mouseY, self.sizeSlider.value());
             pop();
-        }
-        // if the user has released the mouse we want to set the previousMouse values
-        // back to -1.
-        // try and comment out these lines and see what happens!
-        else {
-            previousMouseX = -1;
-            previousMouseY = -1;
-
-            updatePixels();
-            push();
-            noFill();
-            strokeWeight(1);
-            stroke(0);
-            ellipse(mouseX, mouseY, sizeSlider.value());
         }
     };
 
@@ -85,11 +109,14 @@ function EraserTool() {
 
     // ------------------------------------------------
 
-    //adds a button and click handler to the options area. When clicked
-    //toggle the line of symmetry between horizonatl to vertical
+    // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
-        select(".options").html("<div id='eraser-sliders'></div>");
+        select(".options").html(
+            "<label class='options-label'>Size:</label>  <div id='eraser-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='eraser-sizeSliderInput' value='' readonly/>"
+        );
     };
+
+    // ------------------------------------------------
 
     function mousePressOnCanvas(canvas) {
         if (

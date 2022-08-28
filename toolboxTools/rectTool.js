@@ -99,7 +99,7 @@ function RectTool() {
             penSizePrompt:
                 "<label for='input' class='options-label'>Rectangle Thickness:</label>",
             penSizeInput:
-                "<form class='increase-decrease-input'>  <div class='value-button' id='rect-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='rect-number-input' value='2'/>  <div class='value-button' id='rect-increase' value='Increase Value'>+</div>  </form>",
+                "<form class='increase-decrease-input'>  <div class='value-button' id='rect-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='rect-number-input' value='2' readonly/>  <div class='value-button' id='rect-increase' value='Increase Value'>+</div>  </form>",
         };
         select(".options").html(
             optionsHTML.penSizePrompt + optionsHTML.penSizeInput

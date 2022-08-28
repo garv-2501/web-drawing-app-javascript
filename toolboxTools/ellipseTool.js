@@ -113,7 +113,7 @@ function EllipseTool() {
             penSizePrompt:
                 "<label for='input' class='options-label'>Ellipse Thickness:</label>",
             penSizeInput:
-                "<form class='increase-decrease-input'>  <div class='value-button' id='ellipse-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='ellipse-number-input' value='2'/>  <div class='value-button' id='ellipse-increase' value='Increase Value'>+</div>  </form>",
+                "<form class='increase-decrease-input'>  <div class='value-button' id='ellipse-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='ellipse-number-input' value='2' readonly/>  <div class='value-button' id='ellipse-increase' value='Increase Value'>+</div>  </form>",
         };
         select(".options").html(
             optionsHTML.penSizePrompt + optionsHTML.penSizeInput

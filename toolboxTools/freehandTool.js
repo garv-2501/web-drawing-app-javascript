@@ -9,31 +9,49 @@ function FreehandTool() {
     // and the previous mouse coord. Hence, will use previousMouseX and Y to store these coord.
     let previousMouseX;
     let previousMouseY;
-    let self;
+    // To store the slider values
+    let sizeValue = 5;
 
-    // Sliders for the options menu:
-    let sizeSlider;
-    let opacitySlider;
+    let self;
 
     // ------------------------------------------------
 
     this.setup = function () {
+        // Sliders for the options menu:
+        this.sizeSlider = createSlider(1, 50, sizeValue, 1);
+
+        // Initialising previous (x, y) position
         previousMouseX = -1;
         previousMouseY = -1;
+
         self = this;
 
         // Slider for the freehandTool in the options menu
-        sizeSlider = createSlider(1, 100, 5);
-        sizeSlider.parent("#freehand-sliders");
-        opacitySlider = createSlider(1, 100, 100);
-        opacitySlider.parent("#freehand-sliders");
+        self.sizeSlider.parent("#freehand-sliders");
+        self.sizeSlider.addClass("tool-sliders");
     };
 
     // ------------------------------------------------
 
     this.draw = function () {
-        // if the mouse is pressed
-        if (mouseIsPressed && mousePressOnCanvas(c)) {
+        // if mouse is released
+        if (!mouseIsPressed) {
+            // if the user released the mouse, set the previousMouse values to -1
+            previousMouseX = -1;
+            previousMouseY = -1;
+        }
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("freehand-sizeSliderInput").value =
+            self.sizeSlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
+    };
+
+    // ------------------------------------------------
+
+    this.mouseDragged = function () {
+        if (mousePressOnCanvas(c)) {
             // check if they previousX and Y are -1. set them to the current
             // mouse X and Y if they are.
             if (previousMouseX == -1) {
@@ -43,7 +61,7 @@ function FreehandTool() {
             // if we already have values for previousX and Y we can draw a line from
             // there to the current mouse location
             else {
-                strokeWeight(sizeSlider.value());
+                strokeWeight(self.sizeSlider.value());
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
@@ -54,13 +72,6 @@ function FreehandTool() {
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;
             }
-        }
-        // if the user has released the mouse we want to set the previousMouse values
-        // back to -1.
-        // try and comment out these lines and see what happens!
-        else {
-            previousMouseX = -1;
-            previousMouseY = -1;
         }
     };
 
@@ -73,9 +84,25 @@ function FreehandTool() {
 
     // ------------------------------------------------
 
-    //adds a button and click handler to the options area. When clicked
-    //toggle the line of symmetry between horizonatl to vertical
+    // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
-        select(".options").html("<div id='freehand-sliders'></div>");
+        select(".options").html(
+            "<label class='options-label'>Size:</label>  <div id='freehand-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='freehand-sizeSliderInput' value='' readonly/>"
+        );
     };
+
+    // ------------------------------------------------
+
+    // To not let mousePress outside of canvas affect things in the canvas
+    function mousePressOnCanvas(canvas) {
+        if (
+            mouseX > canvas.elt.offsetLeft - 60 &&
+            mouseX < canvas.elt.offsetLeft + canvas.width &&
+            mouseY > canvas.elt.offsetTop - 50 &&
+            mouseY < canvas.elt.offsetTop + canvas.height - 50
+        ) {
+            return true;
+        }
+        return false;
+    }
 }

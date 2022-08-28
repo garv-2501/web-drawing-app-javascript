@@ -95,10 +95,12 @@ body {
     max-height: 50px;
     max-width: 50px;
     padding: 5px;
+    border-radius: 5px;
 }
 .sideBarItem img {
     max-height: 50px;
     max-width: 50px;
+    border-radius: 5px;
     cursor: pointer;
 }
 .sideBarItem :hover {
@@ -182,7 +184,7 @@ body {
     margin-top: 10px;
 }
 /* CSS for the pen size input buttons used in almost all tools */
-/* From "https://codepen.io/mtbroomell/pen/yNwwdv" */
+/* Inspiration from: "https://codepen.io/mtbroomell/pen/yNwwdv" */
 .options-label {
     display: inline-block;
     margin-right: 10px;
@@ -217,9 +219,37 @@ body {
     opacity: 0.75;
 }
 .number-input {
-    border-radius: 10px;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+    background: rgb(255, 255, 255);
     height: 25px;
     width: 60px;
+    overflow: hidden;
+}
+.tool-sliders {
+    /* Inspiration from : "https://codepen.io/shashank_coder/pen/jOqxOpK" */
+    display: inline-block;
+    width: 200px;
+    height: 12px;
+    -webkit-appearance: none;
+    background: rgb(255, 255, 255);
+    outline: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 1);
+}
+.tool-sliders::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #087bff;
+    border: 4px solid #333;
+    box-shadow: -407px 0 0 400px #087bff;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
