@@ -7,6 +7,7 @@ function FreehandTool() {
 
     // for smooth drawing, we will create a line between each registered mouse coord.
     // and the previous mouse coord. Hence, will use previousMouseX and Y to store these coord.
+    //set it to -1 to begin with
     let previousMouseX;
     let previousMouseY;
     // To store the slider values
@@ -61,12 +62,12 @@ function FreehandTool() {
             // if we already have values for previousX and Y we can draw a line from
             // there to the current mouse location
             else {
-                strokeWeight(self.sizeSlider.value());
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
                     255
                 );
+                strokeWeight(self.sizeSlider.value());
                 stroke(colourVal);
                 line(previousMouseX, previousMouseY, mouseX, mouseY);
                 previousMouseX = mouseX;

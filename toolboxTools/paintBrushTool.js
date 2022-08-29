@@ -5,23 +5,32 @@ function PaintBrushTool() {
 
     // ------------------------------------------------
 
+    // Stores all points of a line
     let lineArray;
     let orignalRadius;
 
     // Sliders for the options menu:
-    let sizeSlider;
-    let opacitySlider;
+    let sizeValue = 40;
+    let opacityValue = 70;
+
+    let self;
 
     // ------------------------------------------------
 
     this.setup = function () {
+        // Sliders for the options menu:
+        this.sizeSlider = createSlider(30, 200, sizeValue, 1);
+        this.opacitySlider = createSlider(1, 100, opacityValue, 1);
+
+        // Initialising line Array
         lineArray = [{ x: -1, y: -1 }];
+        self = this;
 
         // Slider for the paintBrushTool in the options menu
-        sizeSlider = createSlider(30, 100, 50, 2);
-        sizeSlider.parent("#paintBrush-sliders");
-        opacitySlider = createSlider(1, 60, 3, 1);
-        opacitySlider.parent("#paintBrush-sliders");
+        self.sizeSlider.parent("#paintBrush-sliders");
+        self.sizeSlider.addClass("tool-sliders");
+        self.opacitySlider.parent("#paintBrush-sliders-1");
+        self.opacitySlider.addClass("tool-sliders");
     };
 
     // ------------------------------------------------
@@ -34,12 +43,14 @@ function PaintBrushTool() {
             }
 
             let colourVal;
+            let opacity;
+            opacity = (self.opacitySlider.value() / 100) * 255;
             colourVal = colourP.convertColourVal(
                 colourP.selectedColour,
-                opacitySlider.value()
+                self.opacitySlider.value()
             );
             fill(colourVal);
-            orignalRadius = sizeSlider.value();
+            orignalRadius = self.sizeSlider.value();
             strokeWeight(orignalRadius);
             for (let i = 1; i < lineArray.length; i++) {
                 paintStroke(lineArray[i].x, lineArray[i].y);
@@ -51,6 +62,15 @@ function PaintBrushTool() {
         else {
             lineArray = [{ x: -1, y: -1 }];
         }
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("paintBrush-sizeSliderInput").value =
+            self.sizeSlider.value();
+        document.getElementById("paintBrush-opacitySliderInput").value =
+            self.opacitySlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
+        opacityValue = self.opacitySlider.value();
     };
 
     // ------------------------------------------------
@@ -88,6 +108,29 @@ function PaintBrushTool() {
     // ------------------------------------------------
 
     this.populateOptions = function () {
-        select(".options").html("<div id='paintBrush-sliders'></div>");
+        let optionsHTML = {
+            sizeInput:
+                "<label class='options-label'>Size:</label>  <div id='paintBrush-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='paintBrush-sizeSliderInput' value='' readonly/>  <br>",
+            opacityInput:
+                "<label class='options-label'>Opacity:</label>  <div id='paintBrush-sliders-1' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='paintBrush-opacitySliderInput' value='' readonly/>",
+        };
+        select(".options").html(
+            optionsHTML.sizeInput + optionsHTML.opacityInput
+        );
     };
+
+    // ------------------------------------------------
+
+    // To not let mousePress outside of canvas affect things in the canvas
+    function mousePressOnCanvas(canvas) {
+        if (
+            mouseX > canvas.elt.offsetLeft - 60 &&
+            mouseX < canvas.elt.offsetLeft + canvas.width &&
+            mouseY > canvas.elt.offsetTop - 50 &&
+            mouseY < canvas.elt.offsetTop + canvas.height - 50
+        ) {
+            return true;
+        }
+        return false;
+    }
 }

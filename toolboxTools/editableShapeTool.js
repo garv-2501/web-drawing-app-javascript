@@ -7,12 +7,25 @@ function EditableShapeTool() {
 
     let editMode;
     let currentShape;
+    // To store the slider values
+    let sizeValue = 5;
+
+    let self;
 
     // ------------------------------------------------
 
     this.setup = function () {
+        // Sliders for the options menu:
+        this.sizeSlider = createSlider(1, 50, sizeValue, 1);
+
         editMode = false;
         currentShape = [];
+
+        self = this;
+
+        // Slider for the freehandTool in the options menu
+        self.sizeSlider.parent("#editableShapes-sliders");
+        self.sizeSlider.addClass("tool-sliders");
     };
 
     // ------------------------------------------------
@@ -36,7 +49,7 @@ function EditableShapeTool() {
                             mouseY,
                             currentShape[i].x,
                             currentShape[i].y
-                        ) < 15
+                        ) < 25
                     ) {
                         currentShape[i].x = mouseX;
                         currentShape[i].y = mouseY;
@@ -46,6 +59,7 @@ function EditableShapeTool() {
         }
 
         beginShape();
+        strokeWeight(self.sizeSlider.value());
         for (let i = 0; i < currentShape.length; i++) {
             vertex(currentShape[i].x, currentShape[i].y);
 
@@ -55,6 +69,12 @@ function EditableShapeTool() {
             }
         }
         endShape();
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("editableShapes-sizeSliderInput").value =
+            self.sizeSlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
     };
 
     // ------------------------------------------------
@@ -70,12 +90,16 @@ function EditableShapeTool() {
     this.populateOptions = function () {
         let optionsHTML = {
             finishButton:
-                "<button class='headButton' id='finishButton'>Finish Shape</button> <br>",
+                "<button class='headButton' id='finishButton'>Finish Shape</button>",
             editButton:
-                "<button class='headButton' id='editButton'>Edit Shape</button>",
+                "<button class='headButton' id='editButton'>Edit Shape</button>  <br>",
+            sizeInput:
+                "<label class='options-label'>Size:</label>  <div id='editableShapes-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='editableShapes-sizeSliderInput' value='' readonly/>",
         };
         select(".options").html(
-            optionsHTML.finishButton + optionsHTML.editButton
+            optionsHTML.finishButton +
+                optionsHTML.editButton +
+                optionsHTML.sizeInput
         );
 
         // click handler for edit button
@@ -109,7 +133,7 @@ function EditableShapeTool() {
             mouseX > canvas.elt.offsetLeft - 60 &&
             mouseX < canvas.elt.offsetLeft + canvas.width &&
             mouseY > canvas.elt.offsetTop - 50 &&
-            mouseY < canvas.elt.offsetTop + canvas.height - 30
+            mouseY < canvas.elt.offsetTop + canvas.height - 50
         ) {
             return true;
         }

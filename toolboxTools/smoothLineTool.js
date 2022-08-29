@@ -67,12 +67,12 @@ function SmoothLineTool() {
             if (lineArray[lineArray.length - 1].x != mouseX) {
                 lineArray.push({ x: mouseX, y: mouseY });
             }
-            strokeWeight(self.sizeSlider.value());
             let colourVal;
             colourVal = colourP.convertColourVal(
                 colourP.selectedColour,
                 self.opacitySlider.value()
             );
+            strokeWeight(self.sizeSlider.value());
             stroke(colourVal);
             noFill();
             beginShape();

@@ -7,18 +7,44 @@ function MirrorDrawTool() {
     //line of symmetry is halfway across the screen
     this.lineOfSymmetry = width / 2;
 
+    // ------------------------------------------------
+
     //this changes in the p5.dom click handler. So storing it as
     //a variable self now means we can still access this in the handler
-    let self = this;
+    let self;
 
-    //where was the mouse on the last time draw was called.
+    // for smooth drawing, we will create a line between each registered mouse coord.
+    // and the previous mouse coord. Hence, will use previousMouseX and Y to store these coord.
     //set it to -1 to begin with
-    let previousMouseX = -1;
-    let previousMouseY = -1;
-
+    let previousMouseX;
+    let previousMouseY;
     //mouse coordinates for the other side of the Line of symmetry.
-    let previousOppositeMouseX = -1;
-    let previousOppositeMouseY = -1;
+    let previousOppositeMouseX;
+    let previousOppositeMouseY;
+    // To store the slider values
+    let sizeValue = 5;
+
+    // ------------------------------------------------
+
+    this.setup = function () {
+        // Sliders for the options menu:
+        this.sizeSlider = createSlider(1, 50, sizeValue, 1);
+
+        // Initialising previous (x, y) position
+        previousMouseX = -1;
+        previousMouseY = -1;
+
+        previousOppositeMouseX = -1;
+        previousOppositeMouseY = -1;
+
+        self = this;
+
+        // Slider for the freehandTool in the options menu
+        self.sizeSlider.parent("#mirrorTool-sliders");
+        self.sizeSlider.addClass("tool-sliders");
+    };
+
+    // ------------------------------------------------
 
     this.draw = function () {
         //display the last save state of pixels
@@ -38,7 +64,7 @@ function MirrorDrawTool() {
             //if there are values in the previous locations
             //draw a line between them and the current positions
             else {
-                strokeWeight(5);
+                strokeWeight(self.sizeSlider.value());
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
@@ -69,7 +95,6 @@ function MirrorDrawTool() {
 
         //after the drawing is done save the pixel state. We don't want the
         //line of symmetry to be part of our drawing
-
         loadPixels();
 
         //push the drawing state so that we can set the stroke weight and colour
@@ -84,7 +109,15 @@ function MirrorDrawTool() {
         }
         //return to the original stroke
         pop();
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("mirrorTool-sizeSliderInput").value =
+            self.sizeSlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
     };
+
+    // ------------------------------------------------
 
     /*calculate an opposite coordinate the other side of the
      *symmetry line.
@@ -113,6 +146,8 @@ function MirrorDrawTool() {
         }
     };
 
+    // ------------------------------------------------
+
     //when the tool is deselected update the pixels to just show the drawing and
     //hide the line of symmetry. Also clear options
     this.unselectTool = function () {
@@ -121,11 +156,13 @@ function MirrorDrawTool() {
         select(".options").html("");
     };
 
+    // ------------------------------------------------
+
     //adds a button and click handler to the options area. When clicked
     //toggle the line of symmetry between horizonatl to vertical
     this.populateOptions = function () {
         select(".options").html(
-            "<button class='headButton' id='directionButton'>Make Horizontal</button>"
+            "<button class='headButton' id='directionButton'>Make Horizontal</button>  <br>  <label class='options-label'>Size:</label>  <div id='mirrorTool-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='mirrorTool-sizeSliderInput' value='' readonly/>"
         );
         // 	//click handler
         select("#directionButton").mouseClicked(function () {
