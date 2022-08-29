@@ -9,14 +9,19 @@ let c;
 
 // Preloading all images for the stamp tool
 let star;
-let cloud;
-let grass;
-let smoke;
-let rain;
+let stampCloud;
+let stampGrass;
+let stampSmoke;
+let stampRain;
 
 // Preload function for the stamp tool images
 function preload() {
+    // Images for the stamp tool
     star = loadImage("./assets/star.jpeg");
+    stampCloud = loadImage("./assets/stampTool_img/cloud.png");
+    stampGrass = loadImage("./assets/stampTool_img/grass.png");
+    stampRain = loadImage("./assets/stampTool_img/rain.png");
+    stampSmoke = loadImage("./assets/stampTool_img/smoke.png");
 }
 
 // Setup function, runs once

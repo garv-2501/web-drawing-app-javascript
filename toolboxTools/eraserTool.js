@@ -66,6 +66,8 @@ function EraserTool() {
         }
     };
 
+    // ------------------------------------------------
+
     this.mouseDragged = function () {
         if (mousePressOnCanvas(c)) {
             // check if they previousX and Y are -1. set them to the current
