@@ -2,24 +2,62 @@ function EllipseTool() {
     // set an icon and a name for the object
     this.name = "Ellipse Tool";
     this.icon = "assets/ellipseTool.png";
-    this.ellipseThickness = 10;
 
     // ------------------------------------------------
 
+    // We will be making a line from the previous point to the
+    // new point.The following values store the location of the
+    // starting point of the line. -1 shows that we haven't added a
+    // starting point.
     let startMouseX;
     let startMouseY;
+    // Boolean var that stores if drawing is on or off
     let drawing;
+    // To store the slider values
+    let sizeValue = 3;
+    let opacityValue = 255;
+    let isFill = false;
 
     let self;
 
     // ------------------------------------------------
 
     this.setup = function () {
+        // Sliders and buttons for the options menu:
+        if (isFill) {
+            this.fillButton = createButton("Don't Fill");
+        } else {
+            this.fillButton = createButton("Fill");
+        }
+        this.sizeSlider = createSlider(1, 50, sizeValue, 1);
+        this.opacitySlider = createSlider(10, 255, opacityValue, 5);
+
+        // Initialising previous (x, y) position and the drawing boolean var
         startMouseX = -1;
         startMouseY = -1;
         drawing = false;
 
         self = this;
+
+        // Sliders and buttons for the rect tool in the options menu
+        self.fillButton.parent("#ellipse-buttons");
+        self.fillButton.addClass("headButton");
+
+        self.sizeSlider.parent("#ellipse-sliders");
+        self.sizeSlider.addClass("tool-sliders");
+
+        self.opacitySlider.parent("#ellipse-sliders-1");
+        self.opacitySlider.addClass("tool-sliders");
+
+        // giving functionality to the fillButton
+        self.fillButton.mousePressed(function () {
+            isFill = !isFill;
+            if (isFill) {
+                self.fillButton.html("Don't Fill");
+            } else {
+                self.fillButton.html("Fill");
+            }
+        });
     };
 
     // ------------------------------------------------
@@ -32,8 +70,10 @@ function EllipseTool() {
             if (startMouseX == -1) {
                 startMouseX = mouseX;
                 startMouseY = mouseY;
+
                 // set drawing to true to start drawing
                 drawing = true;
+
                 // This will load the current state of the canvas so
                 // you don't have multiple lines and the line is commited only when
                 // you release the mouse
@@ -42,14 +82,25 @@ function EllipseTool() {
                 // This will update the screen with the new line when the mouse is released
                 // and then draw a line with starting X and Y and the current mouse X and Y
                 updatePixels();
-                strokeWeight(self.ellipseThickness);
+
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
-                    255
+                    self.opacitySlider.value()
                 );
-                stroke(colourVal);
-                noFill();
+
+                strokeWeight(self.sizeSlider.value());
+
+                // Only fill when the fill button is pressed, noStroke when fill is ON
+                if (isFill) {
+                    noStroke();
+                    fill(colourVal);
+                } else {
+                    stroke(colourVal);
+                    noFill();
+                }
+
+                // conditionals checking how and where to draw the ellipse
                 if (startMouseX - mouseX > 0) {
                     if (startMouseY - mouseY > 0) {
                         ellipse(
@@ -94,12 +145,20 @@ function EllipseTool() {
             startMouseX = -1;
             startMouseY = -1;
         }
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("ellipse-sizeSliderInput").value =
+            self.sizeSlider.value();
+        document.getElementById("ellipse-opacitySliderInput").value =
+            self.opacitySlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
+        opacityValue = self.opacitySlider.value();
     };
 
     // ------------------------------------------------
 
     this.unselectTool = function () {
-        //updatePixels();
         //clear options
         select(".options").html("");
     };
@@ -108,39 +167,20 @@ function EllipseTool() {
 
     //adds a button and click handler to the options area. When clicked
     //toggle the line of symmetry between horizonatl to vertical
+    // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
         let optionsHTML = {
-            penSizePrompt:
-                "<label for='input' class='options-label'>Ellipse Thickness:</label>",
-            penSizeInput:
-                "<form class='increase-decrease-input'>  <div class='value-button' id='ellipse-decrease' value='Decrease Value'>-</div>  <input type='number' class='number-input' id='ellipse-number-input' value='2' readonly/>  <div class='value-button' id='ellipse-increase' value='Increase Value'>+</div>  </form>",
+            fillInput:
+                "<div id='ellipse-buttons' style='display:inline-block;margin-top:3px' ></div>  <br>",
+            sizeInput:
+                "<label class='options-label'>Border Size:</label>  <div id='ellipse-sliders' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='ellipse-sizeSliderInput' value='' readonly/>  <br>",
+            opacityInput:
+                "<label class='options-label'>Opacity:</label>  <div id='ellipse-sliders-1' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='ellipse-opacitySliderInput' value='' readonly/>",
         };
         select(".options").html(
-            optionsHTML.penSizePrompt + optionsHTML.penSizeInput
+            optionsHTML.fillInput +
+                optionsHTML.sizeInput +
+                optionsHTML.opacityInput
         );
-        // Click handler
-        // increase
-        select("#ellipse-increase").mouseClicked(function () {
-            let value = parseInt(
-                document.getElementById("ellipse-number-input").value,
-                10
-            );
-            value = isNaN(value) ? 0 : value;
-            value++;
-            document.getElementById("ellipse-number-input").value = value;
-            self.ellipseThickness = value;
-        });
-        //click handler
-        select("#ellipse-decrease").mouseClicked(function () {
-            value = parseInt(
-                document.getElementById("ellipse-number-input").value,
-                10
-            );
-            value = isNaN(value) ? 1 : value;
-            value < 2 ? (value = 2) : "";
-            value--;
-            document.getElementById("ellipse-number-input").value = value;
-            self.ellipseThickness = value;
-        });
     };
 }

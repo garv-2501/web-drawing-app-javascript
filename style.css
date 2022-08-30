@@ -30,9 +30,10 @@ body {
     font-size: 150%;
 }
 
-/* ------------------- */
+/* ------------------------------------- */
 /* CSS for the header of the drawing app */
-/* ------------------- */
+/* ------------------------------------- */
+
 .header {
     grid-area: header;
     font-family: Helvetica, sans-serif;
@@ -46,6 +47,7 @@ body {
     user-select: none;
 }
 /* CSS for the buttons in the header box */
+/* This button is also used in the options menu of many tools */
 .headButton {
     background-color: rgb(32, 32, 32);
     border-radius: 4px;
@@ -80,6 +82,7 @@ body {
 /* ------------------- */
 /* CSS for the sidebar with the tool icons */
 /* ------------------- */
+
 #sidebar {
     grid-area: sidebar;
     border-bottom: solid;
@@ -135,6 +138,7 @@ body {
 /* ------------------- */
 /* CSS for the convas */
 /* ------------------- */
+
 #content {
     grid-area: content;
 }
@@ -171,6 +175,7 @@ body {
 /* ------------------- */
 /* CSS for the options box */
 /* ------------------- */
+
 .options {
     grid-area: options;
     padding: 5px;
@@ -191,33 +196,6 @@ body {
     margin-right: 10px;
     font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
     padding-bottom: 3px;
-}
-.increase-decrease-input {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 3px;
-}
-.value-button {
-    display: inline-block;
-    color: #fff;
-    font-size: 27px;
-    border-radius: 20px;
-    height: 20px;
-    width: 35px;
-    text-align: center;
-    vertical-align: middle;
-    padding-bottom: 10px;
-    background-color: rgb(32, 32, 32);
-    cursor: pointer;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.value-button:hover {
-    opacity: 0.75;
 }
 .number-input {
     font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
@@ -257,8 +235,7 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-/* Buttons for the editable tool */
+/* Button for the editable tool */
 #finishButton {
     margin-top: 12px;
     margin-bottom: 10px;

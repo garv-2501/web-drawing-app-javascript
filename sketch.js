@@ -50,10 +50,10 @@ function setup() {
     toolbox.addTool(new SprayCanTool());
     toolbox.addTool(new MirrorDrawTool());
     toolbox.addTool(new StampTool());
-    toolbox.addTool(new RectTool());
-    toolbox.addTool(new EllipseTool());
     toolbox.addTool(new EditableShapeTool());
     toolbox.addTool(new ScissorTool());
+    toolbox.addTool(new RectTool());
+    toolbox.addTool(new EllipseTool());
 
     // Background of the canvas
     background(255);

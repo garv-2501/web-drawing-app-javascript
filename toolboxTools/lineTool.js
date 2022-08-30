@@ -31,7 +31,7 @@ function LineToTool() {
 
         self = this;
 
-        // Slider for the freehandTool in the options menu
+        // Slider for the line tool in the options menu
         self.sizeSlider.parent("#lineTool-sliders");
         self.sizeSlider.addClass("tool-sliders");
     };

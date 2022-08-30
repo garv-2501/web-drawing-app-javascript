@@ -55,7 +55,13 @@ function SmoothLineTool() {
         if (mousePressOnCanvas(c)) {
             // To just add a dot when the user presses but doesn't drag the mouse
             loadPixels();
+            push();
+            strokeWeight(self.sizeSlider.value());
             point(mouseX, mouseY);
+            pop();
+            if (lineArray[lineArray.length - 1].x != mouseX) {
+                lineArray.push({ x: mouseX, y: mouseY });
+            }
         }
     };
 

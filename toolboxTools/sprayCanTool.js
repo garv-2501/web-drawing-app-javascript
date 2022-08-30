@@ -87,11 +87,11 @@ function SprayCanTool() {
     this.populateOptions = function () {
         let optionsHTML = {
             thicknessInput:
-                "<label class='options-label'>Thickness:</label>  <div id='sprayCan-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='sprayCan-thicknessSliderInput' value='' readonly/>  <br>",
+                "<label class='options-label'>Thickness:</label>  <div id='sprayCan-sliders' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='sprayCan-thicknessSliderInput' value='' readonly/>  <br>",
             pointsInput:
-                "<label class='options-label'>Points:</label>  <div id='sprayCan-sliders-1' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='sprayCan-pointsSliderInput' value='' readonly/>  <br>",
+                "<label class='options-label'>Points:</label>  <div id='sprayCan-sliders-1' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='sprayCan-pointsSliderInput' value='' readonly/>  <br>",
             spreadInput:
-                "<label class='options-label'>Spread:</label>  <div id='sprayCan-sliders-2' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='sprayCan-spreadSliderInput' value='' readonly/>",
+                "<label class='options-label'>Spread:</label>  <div id='sprayCan-sliders-2' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='sprayCan-spreadSliderInput' value='' readonly/>",
         };
         select(".options").html(
             optionsHTML.thicknessInput +
