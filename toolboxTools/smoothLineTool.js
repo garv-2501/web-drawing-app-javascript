@@ -86,6 +86,10 @@ function SmoothLineTool() {
                 curveVertex(lineArray[i].x, lineArray[i].y);
             }
             endShape();
+        } else {
+            // Added so that the previous line doesn't disappear when you draw a line
+            // that doesn't start from the canvas
+            loadPixels();
         }
     };
 
