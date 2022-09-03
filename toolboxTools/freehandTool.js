@@ -35,24 +35,7 @@ function FreehandTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        // if mouse is released
-        if (!mouseIsPressed) {
-            // if the user released the mouse, set the previousMouse values to -1
-            previousMouseX = -1;
-            previousMouseY = -1;
-        }
-
-        // Changing the slider input value displayed in the options menu
-        document.getElementById("freehand-sizeSliderInput").value =
-            self.sizeSlider.value();
-        // Store the slider value:
-        sizeValue = self.sizeSlider.value();
-    };
-
-    // ------------------------------------------------
-
-    this.mouseDragged = function () {
-        if (mousePressOnCanvas(c)) {
+        if (mouseIsPressed && mousePressOnCanvas(c)) {
             // check if they previousX and Y are -1. set them to the current
             // mouse X and Y if they are.
             if (previousMouseX == -1) {
@@ -73,8 +56,22 @@ function FreehandTool() {
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;
             }
+        } else {
+            // if the user released the mouse, set the previousMouse values to -1
+            previousMouseX = -1;
+            previousMouseY = -1;
         }
+
+        // Changing the slider input value displayed in the options menu
+        document.getElementById("freehand-sizeSliderInput").value =
+            self.sizeSlider.value();
+        // Store the slider value:
+        sizeValue = self.sizeSlider.value();
     };
+
+    // ------------------------------------------------
+
+    this.mouseDragged = function () {};
 
     // ------------------------------------------------
 

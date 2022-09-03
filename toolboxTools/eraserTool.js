@@ -34,7 +34,39 @@ function EraserTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        if (!mouseIsPressed) {
+        if (mouseIsPressed && mousePressOnCanvas(c)) {
+            if (mousePressOnCanvas(c)) {
+                // check if they previousX and Y are -1. set them to the current
+                // mouse X and Y if they are.
+                if (previousMouseX == -1) {
+                    previousMouseX = mouseX;
+                    previousMouseY = mouseY;
+                }
+                // if we already have values for previousX and Y we can draw a line from
+                // there to the current mouse location
+                else {
+                    push();
+                    // Added a fraction of the value so the eraser does not leave marks
+                    strokeWeight(
+                        self.sizeSlider.value() + self.sizeSlider.value() / 5
+                    );
+                    stroke(255);
+                    line(previousMouseX, previousMouseY, mouseX, mouseY);
+                    previousMouseX = mouseX;
+                    previousMouseY = mouseY;
+                    pop();
+                }
+
+                // For the eraser border
+                loadPixels();
+                push();
+                noFill();
+                strokeWeight(1);
+                stroke(0);
+                ellipse(mouseX, mouseY, self.sizeSlider.value());
+                pop();
+            }
+        } else {
             // if the user released the mouse, set the previousMouse values to -1
             previousMouseX = -1;
             previousMouseY = -1;
@@ -63,42 +95,6 @@ function EraserTool() {
     this.mousePressed = function () {
         if (!mousePressOnCanvas(c)) {
             updatePixels();
-        }
-    };
-
-    // ------------------------------------------------
-
-    this.mouseDragged = function () {
-        if (mousePressOnCanvas(c)) {
-            // check if they previousX and Y are -1. set them to the current
-            // mouse X and Y if they are.
-            if (previousMouseX == -1) {
-                previousMouseX = mouseX;
-                previousMouseY = mouseY;
-            }
-            // if we already have values for previousX and Y we can draw a line from
-            // there to the current mouse location
-            else {
-                push();
-                // Added a fraction of the value so the eraser does not leave marks
-                strokeWeight(
-                    self.sizeSlider.value() + self.sizeSlider.value() / 5
-                );
-                stroke(255);
-                line(previousMouseX, previousMouseY, mouseX, mouseY);
-                previousMouseX = mouseX;
-                previousMouseY = mouseY;
-                pop();
-            }
-
-            // For the eraser border
-            loadPixels();
-            push();
-            noFill();
-            strokeWeight(1);
-            stroke(0);
-            ellipse(mouseX, mouseY, self.sizeSlider.value());
-            pop();
         }
     };
 
