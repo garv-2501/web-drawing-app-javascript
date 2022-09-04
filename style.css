@@ -87,7 +87,8 @@ body {
     grid-area: sidebar;
     border-bottom: solid;
     border-color: rgb(100, 100, 100);
-    border-width: 1px;
+    border-width: 2px;
+    padding-top: 5px;
 
     /* disable text selection */
     -webkit-user-select: none;
@@ -98,7 +99,7 @@ body {
 .sideBarItem {
     max-height: 50px;
     max-width: 50px;
-    padding: 5px;
+    margin-left: 5px;
     border-radius: 5px;
 }
 .sideBarItem img {

@@ -121,7 +121,7 @@ function EraserTool() {
             mouseX > canvas.elt.offsetLeft - 60 &&
             mouseX < canvas.elt.offsetLeft + canvas.width &&
             mouseY > canvas.elt.offsetTop - 50 &&
-            mouseY < canvas.elt.offsetTop + canvas.height - 30
+            mouseY < canvas.elt.offsetTop + canvas.height - 65
         ) {
             return true;
         }
