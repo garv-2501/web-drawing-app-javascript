@@ -12,10 +12,12 @@ function HelperFunctions() {
         loadPixels();
     });
 
-    //event handler for the save image button. saves the canvsa to the
+    //event handler for the save image button. saves the canvas to the
     //local file system.
     select("#saveImageButton").mouseClicked(function () {
+        // Stores the canvas with the name that the user inputs
         let result = window.prompt("Name your project:");
+        // If no input, stores the canvas with the date of the operation
         if (result == "") {
             d = day();
             m = month();
@@ -23,6 +25,7 @@ function HelperFunctions() {
             dateString = d + "_" + m + "_" + y + ".png";
             saveCanvas(dateString);
         } else if (result == null) {
+            // Gives an error message when no name
             console.log("Did not save the file");
         } else {
             saveCanvas(result);

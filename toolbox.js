@@ -21,6 +21,7 @@ function Toolbox() {
 
     //add a new tool icon to the html page
     let addToolIcon = function (icon, name) {
+        // Creates a div for the image that also contains the tooltip of the tool with the desired name
         let sideBarItem = createDiv(
             "<img src='" +
                 icon +
@@ -73,7 +74,8 @@ function Toolbox() {
                 if (this.selectedTool.hasOwnProperty("populateOptions")) {
                     this.selectedTool.populateOptions();
                 }
-                //if the tool has an options area. Populate it now.
+                //if the tool has setup function, implement it now
+                // Implemented once, just like the setup function in sketch.js
                 if (this.selectedTool.hasOwnProperty("setup")) {
                     this.selectedTool.setup();
                 }
