@@ -55,6 +55,9 @@ function StampTool() {
     // ------------------------------------------------
 
     this.mousePressed = function () {
+        // if the mouse is pressed on the canvas, do the following
+        // This draws the selected stamp on the canvas where the mouse is pressed
+        // The mouse press is the center of the image being pasted
         if (mousePressOnCanvas(c)) {
             let stampX = mouseX - self.sizeSlider.value() / 2;
             let stampY = mouseY - self.sizeSlider.value() / 2;
@@ -96,8 +99,19 @@ function StampTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
+    this.unselectTool = function () {
+        //clear options
+        select(".options").html("");
+    };
+
+    // ------------------------------------------------
+
+    // ------------------------------------------------
+
     // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             sizeInput:
                 "<label class='options-label'>Size:</label>  <div id='stamp-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='stamp-sizeSliderInput' value='' readonly/>  <br>",

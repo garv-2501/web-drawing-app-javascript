@@ -63,7 +63,7 @@ function RectTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        // if the mouse is pressed
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             // check if starting X and Y are -1. If yes, set them to
             // current mouse X and Y.
@@ -159,6 +159,7 @@ function RectTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -168,6 +169,7 @@ function RectTool() {
 
     // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             fillInput:
                 "<div id='rect-buttons' style='display:inline-block;margin-top:3px' ></div>  <br>",

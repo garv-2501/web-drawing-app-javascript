@@ -5,11 +5,15 @@ function EditableShapeTool() {
 
     // ------------------------------------------------
 
+    // Used to change the behaviour of the tool
     let editMode;
+    // Stores the vertices of the current shape (array)
     let currentShape;
     // To store the slider values
     let sizeValue = 5;
 
+    //this changes in the p5.dom click handler. So storing it as
+    //a variable self now means we can still access this in the handler
     let self;
 
     // ------------------------------------------------
@@ -18,6 +22,7 @@ function EditableShapeTool() {
         // Sliders for the options menu:
         this.sizeSlider = createSlider(1, 50, sizeValue, 1);
 
+        // Initialising variables
         editMode = false;
         currentShape = [];
 
@@ -34,6 +39,7 @@ function EditableShapeTool() {
         noFill();
         updatePixels();
 
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             if (!editMode) {
                 // Adding verticies to the currentShape array
@@ -42,6 +48,7 @@ function EditableShapeTool() {
                     y: mouseY,
                 });
             } else {
+                // When editmode = false, edit the shape by moving the vertex selected
                 for (i = 0; i < currentShape.length; i++) {
                     if (
                         dist(
@@ -58,7 +65,9 @@ function EditableShapeTool() {
             }
         }
 
+        // Drawing the shape
         beginShape();
+        // Giving the shape the same stroke size as the slider value
         strokeWeight(self.sizeSlider.value());
         for (let i = 0; i < currentShape.length; i++) {
             vertex(currentShape[i].x, currentShape[i].y);
@@ -79,15 +88,17 @@ function EditableShapeTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
-        //updatePixels();
         //clear options
         select(".options").html("");
     };
 
     // ------------------------------------------------
 
+    // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             finishButton:
                 "<button class='headButton' id='finishButton'>Finish Shape</button>",

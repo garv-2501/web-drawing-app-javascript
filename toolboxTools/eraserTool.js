@@ -34,6 +34,7 @@ function EraserTool() {
     // ------------------------------------------------
 
     this.draw = function () {
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             if (mousePressOnCanvas(c)) {
                 // check if they previousX and Y are -1. set them to the current
@@ -100,6 +101,7 @@ function EraserTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -116,6 +118,7 @@ function EraserTool() {
 
     // ------------------------------------------------
 
+    // To not let mousePress outside of canvas affect things in the canvas
     function mousePressOnCanvas(canvas) {
         if (
             mouseX > canvas.elt.offsetLeft - 60 &&

@@ -35,6 +35,7 @@ function FreehandTool() {
     // ------------------------------------------------
 
     this.draw = function () {
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             // check if they previousX and Y are -1. set them to the current
             // mouse X and Y if they are.
@@ -75,6 +76,7 @@ function FreehandTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");

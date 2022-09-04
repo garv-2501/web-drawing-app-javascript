@@ -9,7 +9,7 @@ function SmoothLineTool() {
     let lineArray;
     // To store the slider values
     let sizeValue = 5;
-    let opacityValue = 255;
+    let opacityValue = 100;
 
     let self;
 
@@ -18,7 +18,7 @@ function SmoothLineTool() {
     this.setup = function () {
         // Sliders for the options menu:
         this.sizeSlider = createSlider(1, 50, sizeValue, 1);
-        this.opacitySlider = createSlider(10, 255, opacityValue, 5);
+        this.opacitySlider = createSlider(5, 100, opacityValue, 5);
 
         // Initialising line Array
         lineArray = [{ x: -1, y: -1 }];
@@ -52,8 +52,10 @@ function SmoothLineTool() {
     // ------------------------------------------------
 
     this.mousePressed = function () {
+        // When the mouse is pressed on the canvas, do the following:
         if (mousePressOnCanvas(c)) {
-            // To just add a dot when the user presses but doesn't drag the mouse
+            // This adds a dot when the user presses the mouse but deletes the dot if the
+            // mouse is dragged
             loadPixels();
             push();
             strokeWeight(self.sizeSlider.value());
@@ -68,19 +70,24 @@ function SmoothLineTool() {
     // ------------------------------------------------
 
     this.mouseDragged = function () {
+        // When the mouse is dragged on the canvas, do the following:
         if (mousePressOnCanvas(c)) {
             updatePixels();
+            // this code adds a point in the line array if the point
+            // is not the same as the previous point at regular intervals.
             if (lineArray[lineArray.length - 1].x != mouseX) {
                 lineArray.push({ x: mouseX, y: mouseY });
             }
+            // Used to give the tool a colour with variable opacity
             let colourVal;
             colourVal = colourP.convertColourVal(
                 colourP.selectedColour,
-                self.opacitySlider.value()
+                (self.opacitySlider.value() / 100) * 255
             );
             strokeWeight(self.sizeSlider.value());
             stroke(colourVal);
             noFill();
+            // this code draws the shape with curved vertices so that the line remains smooth
             beginShape();
             for (let i = 1; i < lineArray.length; i++) {
                 curveVertex(lineArray[i].x, lineArray[i].y);
@@ -95,6 +102,7 @@ function SmoothLineTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -104,6 +112,7 @@ function SmoothLineTool() {
 
     // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             sizeInput:
                 "<label class='options-label'>Size:</label>  <div id='smoothLine-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='smoothLine-sizeSliderInput' value='' readonly/>  <br>",

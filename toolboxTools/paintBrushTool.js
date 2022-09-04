@@ -36,12 +36,14 @@ function PaintBrushTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        // if the mouse is pressed
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
+            // If the new point is not equal to the old point already added, add the new point to the array
             if (lineArray[lineArray.length - 1].x != mouseX) {
                 lineArray.push({ x: mouseX, y: mouseY });
             }
 
+            // Gives the tool a colour that has a variable opacity
             let colourVal;
             let opacity;
             opacity = (self.opacitySlider.value() / 100) * 255;
@@ -52,6 +54,8 @@ function PaintBrushTool() {
             fill(colourVal);
             orignalRadius = self.sizeSlider.value();
             strokeWeight(orignalRadius);
+
+            // Creating strokes in a loop to give it a spead effect
             for (let i = 1; i < lineArray.length; i++) {
                 paintStroke(lineArray[i].x, lineArray[i].y);
             }
@@ -75,21 +79,26 @@ function PaintBrushTool() {
 
     // ------------------------------------------------
 
+    // this function makes natural looking strokes when called
     function paintStroke(startX, startY) {
         noStroke();
 
         for (let j = 0; j <= 10; j++) {
             let randomVal = random(2.0) - 1.0;
 
+            // The shape of the stroke begins
             beginShape();
 
             for (let i = 0; i <= 360; i += 20) {
+                // Adds some randomness or noise to the points added
                 let radius =
                     orignalRadius +
                     orignalRadius * 0.7 * (noise(10 * randomVal + i) * 2 - 1);
 
+                // Helps in forming a circular stroke
                 let x = radius * cos(i);
                 let y = radius * sin(i);
+                // Adding a vertex with curved joining lines
                 curveVertex(startX + x, startY - y);
             }
 
@@ -99,7 +108,7 @@ function PaintBrushTool() {
 
     // ------------------------------------------------
 
-    // clears populate options when tool is unselected
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -108,6 +117,7 @@ function PaintBrushTool() {
     // ------------------------------------------------
 
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             sizeInput:
                 "<label class='options-label'>Size:</label>  <div id='paintBrush-sliders' style='display:inline-block;margin-top:5px' ></div>  <input type='number' class='number-input' id='paintBrush-sizeSliderInput' value='' readonly/>  <br>",

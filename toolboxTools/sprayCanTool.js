@@ -1,6 +1,6 @@
 function SprayCanTool() {
     // set an icon and a name for the object
-    this.name = "sprayCan Tool";
+    this.name = "Spray Can Tool";
     this.icon = "assets/sprayCanTool.png";
 
     // ------------------------------------------------
@@ -36,13 +36,14 @@ function SprayCanTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        //if the mouse is pressed paint on the canvas
-        //spread describes how far to spread the paint from the mouse pointer
-        //points holds how many pixels of paint for each mouse press.
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
+            // The following code draws multiple points with a given thickness, range and
+            // number to give the illusion of spraying on the screen
             for (let i = 0; i < self.pointsSlider.value(); i++) {
                 strokeWeight(self.thicknessSlider.value());
                 let colourVal;
+                // Used to give the points colour that has a variable opacity value.
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
                     255
@@ -76,6 +77,7 @@ function SprayCanTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -85,6 +87,7 @@ function SprayCanTool() {
 
     // adds sliders and display slider value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             thicknessInput:
                 "<label class='options-label'>Thickness:</label>  <div id='sprayCan-sliders' style='display:inline-block;margin-top:3px' ></div>  <input type='number' class='number-input' id='sprayCan-thicknessSliderInput' value='' readonly/>  <br>",

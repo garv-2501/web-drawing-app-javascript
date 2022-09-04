@@ -39,7 +39,7 @@ function LineToTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        // if the mouse is pressed
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             // check if starting X and Y are -1. If yes, set them to
             // current mouse X and Y.
@@ -83,6 +83,7 @@ function LineToTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");

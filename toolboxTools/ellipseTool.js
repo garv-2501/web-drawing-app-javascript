@@ -15,7 +15,7 @@ function EllipseTool() {
     let drawing;
     // To store the slider values
     let sizeValue = 3;
-    let opacityValue = 255;
+    let opacityValue = 100;
     let isFill = false;
 
     let self;
@@ -30,7 +30,7 @@ function EllipseTool() {
             this.fillButton = createButton("Fill");
         }
         this.sizeSlider = createSlider(1, 50, sizeValue, 1);
-        this.opacitySlider = createSlider(10, 255, opacityValue, 5);
+        this.opacitySlider = createSlider(1, 100, opacityValue, 1);
 
         // Initialising previous (x, y) position and the drawing boolean var
         startMouseX = -1;
@@ -63,7 +63,7 @@ function EllipseTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        // if the mouse is pressed
+        // if the mouse is pressed on the canvas, do the following
         if (mouseIsPressed && mousePressOnCanvas(c)) {
             // check if starting X and Y are -1. If yes, set them to
             // current mouse X and Y.
@@ -83,12 +83,14 @@ function EllipseTool() {
                 // and then draw a line with starting X and Y and the current mouse X and Y
                 updatePixels();
 
+                // gives the tool a colour with the feature to change opacity
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
-                    self.opacitySlider.value()
+                    self.opacitySlider.value() / 100
                 );
 
+                // Giving a variable stroke size to the tool
                 strokeWeight(self.sizeSlider.value());
 
                 // Only fill when the fill button is pressed, noStroke when fill is ON
@@ -158,6 +160,7 @@ function EllipseTool() {
 
     // ------------------------------------------------
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function () {
         //clear options
         select(".options").html("");
@@ -165,10 +168,9 @@ function EllipseTool() {
 
     // ------------------------------------------------
 
-    //adds a button and click handler to the options area. When clicked
-    //toggle the line of symmetry between horizonatl to vertical
-    // adds sliders and display slider value to the options menu
+    // adds sliders and buttons and displays their value to the options menu
     this.populateOptions = function () {
+        // An object that stores different parts of the HTML code that needs to be added to the options menu
         let optionsHTML = {
             fillInput:
                 "<div id='ellipse-buttons' style='display:inline-block;margin-top:3px' ></div>  <br>",
@@ -186,6 +188,7 @@ function EllipseTool() {
 
     // ------------------------------------------------
 
+    // To not let mousePress outside of canvas affect things in the canvas
     function mousePressOnCanvas(canvas) {
         if (
             mouseX > canvas.elt.offsetLeft - 60 &&
