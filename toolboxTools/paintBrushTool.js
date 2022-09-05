@@ -80,6 +80,7 @@ function PaintBrushTool() {
     // ------------------------------------------------
 
     // this function makes natural looking strokes when called
+    // Was inspired by: "https://youtu.be/smO_u27QRK0"
     function paintStroke(startX, startY) {
         noStroke();
 

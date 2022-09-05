@@ -36,7 +36,6 @@ function EditableShapeTool() {
     // ------------------------------------------------
 
     this.draw = function () {
-        noFill();
         updatePixels();
 
         // if the mouse is pressed on the canvas, do the following
@@ -69,6 +68,11 @@ function EditableShapeTool() {
         beginShape();
         // Giving the shape the same stroke size as the slider value
         strokeWeight(self.sizeSlider.value());
+        // To add a colour with variable opacity
+        let colourVal;
+        colourVal = colourP.convertColourVal(colourP.selectedColour, 255);
+        stroke(colourVal);
+        noFill();
         for (let i = 0; i < currentShape.length; i++) {
             vertex(currentShape[i].x, currentShape[i].y);
 

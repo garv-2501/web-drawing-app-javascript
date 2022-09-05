@@ -87,7 +87,7 @@ function EllipseTool() {
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
-                    self.opacitySlider.value() / 100
+                    (self.opacitySlider.value() / 100) * 255
                 );
 
                 // Giving a variable stroke size to the tool

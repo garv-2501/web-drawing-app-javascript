@@ -15,7 +15,7 @@ function RectTool() {
     let drawing;
     // To store the slider values
     let sizeValue = 3;
-    let opacityValue = 255;
+    let opacityValue = 100;
     let isFill = false;
 
     let self;
@@ -30,7 +30,7 @@ function RectTool() {
             this.fillButton = createButton("Fill");
         }
         this.sizeSlider = createSlider(1, 50, sizeValue, 1);
-        this.opacitySlider = createSlider(10, 255, opacityValue, 5);
+        this.opacitySlider = createSlider(1, 100, opacityValue, 1);
 
         // Initialising previous (x, y) position and the drawing boolean var
         startMouseX = -1;
@@ -87,7 +87,7 @@ function RectTool() {
                 let colourVal;
                 colourVal = colourP.convertColourVal(
                     colourP.selectedColour,
-                    self.opacitySlider.value()
+                    (self.opacitySlider.value() / 100) * 255
                 );
 
                 strokeWeight(self.sizeSlider.value());
@@ -146,7 +146,6 @@ function RectTool() {
             startMouseX = -1;
             startMouseY = -1;
         }
-
         // Changing the slider input value displayed in the options menu
         document.getElementById("rectTool-sizeSliderInput").value =
             self.sizeSlider.value();
